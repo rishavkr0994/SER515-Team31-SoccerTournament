@@ -20,10 +20,5 @@ public class User {
     private String password;
     private String emailAddress;
     private String phoneNo;
-
-    @ManyToOne
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Role role;
+    private Role.UserRole role;
 }
