@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
-import DropdownButton from 'react-bootstrap/Button';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class SignUp extends Component {
     render() {
@@ -34,7 +29,7 @@ export default class SignUp extends Component {
                     <input type="password" className="form-control" placeholder="Enter password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <button >Sign Up</button>
                 <p className="forgot-password text-right">
                     Already registered <a href="../login.component.js">sign in?</a>
                 </p>

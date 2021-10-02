@@ -6,6 +6,8 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
 import Tournaments from "./components/Tournaments";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 
 function App() {
   useEffect(() => {
