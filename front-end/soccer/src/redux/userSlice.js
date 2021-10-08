@@ -19,7 +19,6 @@ const userSlice = createSlice({
         console.log("is False");
         return state;
       }
-      console.log(action);
       console.log("is True");
       state.isLoggedIn = true;
       state.jwt = action.payload.jwt;
