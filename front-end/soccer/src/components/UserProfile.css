@@ -1,0 +1,12 @@
+.userProfile{
+    display: inline-block;
+    flex-direction: row;
+    text-align: center;
+}
+
+.inLine{
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}

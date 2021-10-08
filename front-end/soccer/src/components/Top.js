@@ -9,7 +9,7 @@ import UserProfile from "./UserProfile";
 export default function Top() {
   return (
     <div className="TopCss">
-      <Grid container alignItems="center">
+      <Grid container alignItems="center" justifyContent="flex-end">
         <Grid item xs={3}>
           <div className="imgCSs">
             <img
@@ -22,7 +22,7 @@ export default function Top() {
         <Grid item xs={7}>
           {" "}
         </Grid>
-        <Grid item xs={2} >
+        <Grid item xs={2}>
           <TopLeft></TopLeft>
         </Grid>
       </Grid>
@@ -31,38 +31,47 @@ export default function Top() {
 }
 
 function TopLeft() {
-    const userInfo = GetUser()
+  const userInfo = GetUser();
   if (userInfo.isLoggedIn) {
-    return <UserProfile></UserProfile>;
+    return  <UserProfile></UserProfile>
   } else {
-    return <SignInSignUp></SignInSignUp>;
+    return <SignInSignUp></SignInSignUp>
   }
 }
 
 function SignInSignUp() {
-    const dispatch =useDispatch()
-    const SignUpButton = {
-        marginLeft:"10px",
-        backgroundColor:"grey   "
-    };
+  const dispatch = useDispatch();
+  const SignUpButton = {
+    marginLeft: "10px",
+    backgroundColor: "grey",
+    textAlign: "center",
+  };
 
-function handleLogin (){
-    dispatch(setUser({
+  function handleLogin() {
+    dispatch(
+      setUser({
         role: "admin",
-        email:"xiaoxiao1234",
-        jwt:"werwerasdfdsgaert",
-        firstName:"Runlin",
-        lastName:"Xiao"
-    }))    
-}
+        email: "xiaoxiao1234",
+        jwt: "werwerasdfdsgaert",
+        firstName: "Runlin",
+        lastName: "Xiao",
+      })
+    );
+  }
 
   return (
     <div>
-      <Button variant="contained" style={SignUpButton} onClick={()=>handleLogin()}>
+      <Button
+        variant="contained"
+        style={SignUpButton}
+        onClick={() => handleLogin()}
+      >
         Login
       </Button>
-      
-      <Button variant="contained" style={SignUpButton}>Sign Up</Button>
+
+      <Button variant="contained" style={SignUpButton}>
+        Sign Up
+      </Button>
     </div>
   );
 }
