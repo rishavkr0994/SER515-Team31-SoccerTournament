@@ -1,9 +1,26 @@
+import { Button } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
+import GetUser from "../util/GetUser";
 
-export default function Home(){
-        return(
-            <div className="Main">
-                Home
-            </div>
-        )
+export default function Home() {
+  const userInfo = GetUser();
+  const dispatch = useDispatch();
+  function dispatchUser() {
+    dispatch(
+      setUser({
+        email: "xiaoxiao",
+      })
+    );
+  }
+
+  return (
+      <div className="Main">
+        <p>Hello</p>
+        {console.log(userInfo)}
+        {userInfo.email}
+        <Button onClick={() => dispatchUser()}>Click</Button>
+      </div>
+  );
 }
