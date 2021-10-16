@@ -7,7 +7,7 @@ import GetUser from "../util/GetUser";
 export default function Home() {
   const userInfo = GetUser();
   const dispatch = useDispatch();
-  function dispathcUser() {
+  function dispatchUser() {
     dispatch(
       setUser({
         email: "xiaoxiao",
@@ -20,7 +20,7 @@ export default function Home() {
         <p>Hello</p>
         {console.log(userInfo)}
         {userInfo.email}
-        <Button onClick={() => dispathcUser()}>Click</Button>
+        <Button onClick={() => dispatchUser()}>Click</Button>
       </div>
   );
 }
