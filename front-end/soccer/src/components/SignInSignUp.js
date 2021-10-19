@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import { useDispatch } from "react-redux";
-import { DialogContentText } from "@mui/material";
+import { DialogContentText, InputLabel, MenuItem, Select } from "@mui/material";
 
 export default function SignInSignUp() {
   const dispatch = useDispatch();
@@ -65,9 +65,35 @@ export default function SignInSignUp() {
       });
   };
 
-  const handleSignup = () => {};
+  const handleSignup = () => {
+    fetch("http://localhost:9000/rest/user/signup", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(userSignUp),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (!res.isSuccess) {
+          throw new Error(res.status);
+        }
+        handleClose()
+        return res;
+      })
+      .catch(() => {
+      });
+  };
   const userLogin = {
     username: "",
+    password: "",
+  };
+
+  const userSignUp = {
+    firstName: "",
+    lastName: "",
+    role: "",
+    email: "",
     password: "",
   };
   return (
@@ -133,15 +159,70 @@ export default function SignInSignUp() {
         </DialogActions>
       </Dialog>
 
-      <Dialog open={openSignUp} onClose={handleClose}>
-        <DialogTitle>SignUp</DialogTitle>
-        <DialogContent>
+      <Dialog maxWidth="xs" fullWidth open={openSignUp} onClose={handleClose}>
+        <DialogTitle sx={{ textAlign: "center", backgroundColor: "lightblue" }}>SignUp</DialogTitle>
+        <DialogContent
+          sx={{
+            margin: "auto",
+          }}
+        >
+          <div>
+            <TextField
+              autoFocus
+              margin="normal"
+              id="firstname"
+              label="First name"
+              onChange={(e) => {
+                userSignUp.firstName = e.target.value;
+              }}
+            />
+          </div>
+          <div>
+            <TextField
+              margin="normal"
+              id="lastname"
+              label="Last name "
+              onChange={(e) => {
+                userSignUp.lastName = e.target.value;
+              }}
+            />
+          </div>
+          <InputLabel id="demo-label">Role</InputLabel>
+          <Select
+            labelId="demo-label"
+            id="demo-label"
+            label="Role"
+            onChange={(e) => {
+              userSignUp.role = e.target.value;
+            }}
+            sx={{
+              width:"185px"
+            }}
+          >
+            <MenuItem value={0}>Player</MenuItem>
+            <MenuItem value={1}>Coach</MenuItem>
+            <MenuItem value={2}>Referee</MenuItem>
+          </Select>
+          <div>
+            <TextField
+              margin="normal"
+              id="emailAddress"
+              label="Email Address"
+              type="email"
+              onChange={(e) => {
+                userSignUp.email = e.target.value;
+              }}
+            />
+          </div>
+
           <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="First Name"
-            fullWidth
+            margin="normal"
+            id="signUpPassword"
+            label="Password"
+            type="password"
+            onChange={(e) => {
+              userSignUp.password = e.target.value;
+            }}
           />
         </DialogContent>
         <DialogActions>
