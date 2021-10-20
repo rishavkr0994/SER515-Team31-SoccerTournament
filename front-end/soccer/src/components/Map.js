@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Register(){
+export default function Map(){
         return(
             <div className="Main">
-                Register
+                Map
             </div>
         )
 }

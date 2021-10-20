@@ -3,7 +3,7 @@ import NavMenu from "./components/NavMenu";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
-import Register from "./components/Register";
+import Map from './components/Map'
 import Footer from "./components/Footer";
 import Tournaments from "./components/Tournaments";
 import Top from "./components/Top";
@@ -25,8 +25,8 @@ function App() {
           <Route path="/tournaments">
             <Tournaments></Tournaments>
           </Route>
-          <Route path="/register">
-            <Register></Register>
+          <Route path="/map">
+            <Map></Map>
           </Route>
           <Route path="/">
             <Home></Home>

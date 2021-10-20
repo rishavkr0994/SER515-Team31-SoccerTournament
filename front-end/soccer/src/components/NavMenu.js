@@ -19,7 +19,7 @@ class  NavMenu extends React.Component{
                 <Item label="Tournaments" to="/tournaments"></Item>
               </Grid>
               <Grid item xs={2}>
-                <Item label="Register" to="/register"></Item>
+                <Item label="Map" to="/map"></Item>
               </Grid>
               <Grid item xs={2}>    
                 <Item label="About Us" to="/about"></Item>
