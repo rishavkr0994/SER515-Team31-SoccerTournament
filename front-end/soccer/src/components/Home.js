@@ -1,26 +1,43 @@
-import { Button } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../redux/userSlice";
-import GetUser from "../util/GetUser";
-
+import TournamentCard from "./TournamentCard";
+import "./Home.css";
+import { Container, Grid } from "@mui/material";
 export default function Home() {
-  const userInfo = GetUser();
-  const dispatch = useDispatch();
-  function dispatchUser() {
-    dispatch(
-      setUser({
-        email: "xiaoxiao",
-      })
-    );
-  }
-
   return (
-      <div className="Main">
-        <p>Hello</p>
-        {console.log(userInfo)}
-        {userInfo.email}
-        <Button onClick={() => dispatchUser()}>Click</Button>
-      </div>
+    <div className="Main">
+      <h1 className="Coming"> Upcoming Tournaments</h1>
+      <Container maxWidth="xl">
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <TournamentCard
+              src="tcard2.jpeg"
+              name="Century Hitters Tournament"
+              description="This is a century tournament!!!"
+              timeRange="January 14th - 16th, 2022"
+              endRegistration="December 21, 2021"
+            ></TournamentCard>
+          </Grid>
+          <Grid item xs={4}>
+            <TournamentCard
+              src="tcard1.png"
+              name="Supersixers League"
+              description="Come and join this excited tournament!"
+              timeRange="January 14th - 16th, 2022"
+              endRegistration="December 21, 2021"
+              isOnGoing="true"
+            ></TournamentCard>
+          </Grid>
+          <Grid item xs={4}>
+            <TournamentCard
+              src="tcard3.jpeg"
+              name="Delight Wings Gaming"
+              description="Come and join this excited tournament!"
+              timeRange="January 14th - 16th, 2022"
+              endRegistration="December 21, 2021"
+            ></TournamentCard>
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
   );
 }

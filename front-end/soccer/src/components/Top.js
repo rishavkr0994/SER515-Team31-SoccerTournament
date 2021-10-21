@@ -8,20 +8,21 @@ import SignInSignUp from "./SignInSignUp";
 export default function Top() {
   return (
     <div className="TopCss">
-      <Grid container alignItems="center" justifyContent="flex-end">
-        <Grid item xs={3}>
+      <Grid container alignItems="center">
+        <Grid item xs={2} sx={{alignItems:"left"}}>
           <div>
-            <img
-              className="imgCss"
-              src={require("../public/visit.png")}
-              alt=""
-            ></img>
+            <img className="imgCss" src={require("../visit.png")} alt=""></img>
           </div>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={3} sx={{textAlign:"left",marginLeft:"-110px"}}>
+          <div>
+            <h1>ASU Soccer</h1>
+          </div>
+        </Grid>
+        <Grid item xs={4}>
           {" "}
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{alignItems:"right"}}>
           <TopLeft></TopLeft>
         </Grid>
       </Grid>
@@ -32,9 +33,9 @@ export default function Top() {
 function TopLeft() {
   const userInfo = GetUser();
   if (userInfo.isLoggedIn) {
-    return  <UserProfile></UserProfile>
+    return <UserProfile></UserProfile>;
   } else {
-    return <SignInSignUp></SignInSignUp>
+    return <SignInSignUp></SignInSignUp>;
   }
 }
 
