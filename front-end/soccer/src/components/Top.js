@@ -9,13 +9,15 @@ export default function Top() {
   return (
     <div className="TopCss">
       <Grid container alignItems="center">
-        <Grid item xs={1.5} sx={{alignItems:"left"}}>
+        <Grid item xs={2} sx={{alignItems:"left"}}>
           <div>
-            <img className="imgCss" src={"visit.png"} alt=""></img>
+            <img className="imgCss" src={require("../visit.png")} alt=""></img>
           </div>
         </Grid>
-        <Grid item xs={3} sx={{textAlign:"left"}}>
-          <h1>ASU Soccer</h1>
+        <Grid item xs={3} sx={{textAlign:"left",marginLeft:"-110px"}}>
+          <div>
+            <h1>ASU Soccer</h1>
+          </div>
         </Grid>
         <Grid item xs={4}>
           {" "}

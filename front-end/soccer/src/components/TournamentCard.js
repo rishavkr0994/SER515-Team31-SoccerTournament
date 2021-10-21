@@ -38,7 +38,9 @@ export default function TournamentCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={()=>{
+            console.log(props.name);
+        }}>Learn More</Button>
       </CardActions>
     </Card>
   );

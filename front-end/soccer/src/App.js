@@ -7,6 +7,7 @@ import Map from './components/Map'
 import Footer from "./components/Footer";
 import Tournaments from "./components/Tournaments";
 import Top from "./components/Top";
+import ATournament from "./components/ATournament";
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,9 @@ function App() {
           <Route path="/tournaments">
             <Tournaments></Tournaments>
           </Route>
+          <Route path="/tournament/:id">
+            <ATournament></ATournament>
+            </Route>
           <Route path="/map">
             <Map></Map>
           </Route>
