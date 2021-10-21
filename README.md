@@ -4,7 +4,7 @@
 - Taiga: [Group 31](https://tree.taiga.io/project/rishavkr0994-soccer-tournament-website/backlog)
 - Google Drive: [Group 31](https://drive.google.com/drive/u/3/folders/0AHNourJPboIPUk9PVA)
 
-### Front-end Environment:
+### Front-end Environment
 - Node >= 14.0.0 and npm >= 5.6 
 ### How to run the front end
 1. Git clone the project to your workplace
