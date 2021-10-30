@@ -38,9 +38,7 @@ export default function TournamentCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={()=>{
-            console.log(props.name);
-        }}>Learn More</Button>
+        <Button size="small" href={"/tournament/" + props.name}>Learn More</Button>
       </CardActions>
     </Card>
   );
