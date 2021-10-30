@@ -1,4 +1,12 @@
-import { Button, Grid, Paper, TextField } from "@mui/material";
+import {
+  Button,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  TextField,
+} from "@mui/material";
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -93,9 +101,13 @@ function Schduel() {
 function Register() {
   return (
     <div alignItems="center" className="register">
-      <Paper elevation={3} sx={{marginRight:"30px",minHeight:"400px",maxWidth:"400px"}} alignItems="center">
-        <div className="centerForm" >
-            <h>Register your team!</h>
+      <Paper
+        elevation={3}
+        sx={{ marginRight: "30px", minHeight: "400px", maxWidth: "400px" }}
+        alignItems="center"
+      >
+        <div className="centerForm">
+          <h>Register your team!</h>
         </div>
         <Box
           component="form"
@@ -106,45 +118,28 @@ function Register() {
           autoComplete="off"
         >
           <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Team name"
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Read Only"
-              defaultValue="Hello World"
-              InputProps={{
-                readOnly: true,
+            <TextField required id="outlined-required" label="Team name" />
+            <InputLabel id="demo-label">Type</InputLabel>
+            <Select
+              labelId="demo-label"
+              id="demo-label"
+              label="Type"
+              onChange={(e) => {}}
+              sx={{
+                width: "235px",
               }}
-            />
-            <TextField
-              id="outlined-number"
-              label="Number"
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              id="outlined-search"
-              label="Search field"
-              type="search"
-            />
-            <TextField
-              id="outlined-helperText"
-              label="Helper text"
-              defaultValue="Default Value"
-              helperText="Some important text"
-            />
+            >
+              <MenuItem value={0}>U16</MenuItem>
+              <MenuItem value={1}>U17</MenuItem>
+              <MenuItem value={2}>U18</MenuItem>
+              <MenuItem value={3}>U19</MenuItem>
+              <MenuItem value={4}>U20</MenuItem>
+              <MenuItem value={5}>U21</MenuItem>
+              <MenuItem value={6}>U22</MenuItem>
+              <MenuItem value={7}>U23</MenuItem>
+            </Select>
           </div>
+          <Button variant="contained" sx={{marginTop:"50px",alignContent: 'flex-end'}}>Submit</Button>
         </Box>
       </Paper>
     </div>
