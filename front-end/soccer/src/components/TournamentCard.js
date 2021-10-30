@@ -10,14 +10,14 @@ import './TournamentCard.css'
 export default function TournamentCard(props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
-        { props.isOnGoing === "true" &&
+        { props.tournament.isOnGoing === "true" &&
             <img className="Fire" src="fire.gif" alt="" height="60" />
         }
       <CardMedia
         component="img"
         height="160"
         alt="green iguana"
-        image={props.src}
+        image={props.tournament.src}
       />
       <CardContent
         sx={{
@@ -25,20 +25,20 @@ export default function TournamentCard(props) {
         }}
       >
         <Typography gutterBottom variant="h5" component="div">
-          {props.name}
+          {props.tournament.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.description}
+          {props.tournament.description}
         </Typography>
         <Typography variant="body1" color="green">
-          {props.timeRange}
+          {props.tournament.timeRange}
         </Typography>
         <Typography variant="body2" color="red">
-          Registration end at: {props.endRegistration}
+          Registration end at: {props.tournament.endRegistration}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={"/tournament/" + props.name}>Learn More</Button>
+        <Button size="small" href={"/tournament/" + props.tournament.name}>Learn More</Button>
       </CardActions>
     </Card>
   );

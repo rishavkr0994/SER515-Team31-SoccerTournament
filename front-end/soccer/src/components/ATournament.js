@@ -12,7 +12,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useParams,
   useRouteMatch,
 } from "react-router-dom";
@@ -20,14 +19,16 @@ import "./FooterAndMain.css";
 import TLeft from "./TLeft";
 import "./ATournament.css";
 import { Box, maxWidth } from "@mui/system";
+import { useSelector } from "react-redux";
 
 export default function ATournament() {
-  let { id } = useParams();
+  let { name } = useParams();
   let { path, url } = useRouteMatch();
+
   return (
     <div className="Main">
       <div className="centerTitle">
-        <h1>{id}</h1>
+        <h1>{name}</h1>
       </div>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item xs={2}>
@@ -59,7 +60,7 @@ export default function ATournament() {
       </Grid>
       <Switch>
         <Route exact path={path}>
-          <h3>Please select a topic.</h3>
+          <Details></Details>
         </Route>
         <Route path={`${path}/:topicId`}>
           <Topic />
@@ -74,7 +75,6 @@ function Topic() {
 
   return (
     <div>
-      <h3>{topicId}</h3>
       {topicId === "details" && <Details></Details>}
       {topicId === "schduel" && <Schduel></Schduel>}
       {topicId === "register" && <Register></Register>}
@@ -100,11 +100,16 @@ function Schduel() {
 
 function Register() {
   return (
-    <div alignItems="center" className="register">
+    <div className="register">
       <Paper
         elevation={3}
-        sx={{ marginRight: "30px", minHeight: "400px", maxWidth: "400px" }}
-        alignItems="center"
+        sx={{
+          marginTop: "30px",
+          marginRight: "30px",
+          minHeight: "400px",
+          maxWidth: "700px",
+          minWidth: "450px",
+        }}
       >
         <div className="centerForm">
           <h>Register your team!</h>
@@ -139,7 +144,12 @@ function Register() {
               <MenuItem value={7}>U23</MenuItem>
             </Select>
           </div>
-          <Button variant="contained" sx={{marginTop:"50px",alignContent: 'flex-end'}}>Submit</Button>
+          <Button
+            variant="contained"
+            sx={{ marginTop: "50px", alignContent: "flex-end" }}
+          >
+            Submit
+          </Button>
         </Box>
       </Paper>
     </div>
