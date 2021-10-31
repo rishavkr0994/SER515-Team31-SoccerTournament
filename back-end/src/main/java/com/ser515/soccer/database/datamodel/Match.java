@@ -13,13 +13,13 @@ public class Match {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "team_1_id")
+    @JoinColumn(name = "team_1_id" )
     private Team team1;
     @ManyToOne
-    @JoinColumn(name = "team_2_id")
+    @JoinColumn(name = "team_2_id" )
     private Team team2;
     private Date time;
     @ManyToOne
-    @JoinColumn(name = "field_id")
+    @JoinColumn(name = "field_id" )
     private SoccerField field;
 }

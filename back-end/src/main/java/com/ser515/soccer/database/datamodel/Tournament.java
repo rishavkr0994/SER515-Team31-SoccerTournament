@@ -15,6 +15,7 @@ public class Tournament {
 
     private String name;
     private String iconSrc;
+
     private String description;
     private Date startDate;
     private Date endDate;

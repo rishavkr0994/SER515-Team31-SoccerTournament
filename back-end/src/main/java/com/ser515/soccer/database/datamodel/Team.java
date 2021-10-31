@@ -15,6 +15,7 @@ public class Team {
     private long id;
 
     private String name;
+
     //need change to enum
     private String type;
 }

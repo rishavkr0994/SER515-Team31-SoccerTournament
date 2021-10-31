@@ -14,6 +14,6 @@ import java.util.Optional;
 
 @Repository
 public interface SoccerFieldRepository extends JpaRepository<SoccerField, Long> {
-    Optional<SoccerField> findByName(String name);
+    Optional<SoccerField> findByName(String name );
 }
 

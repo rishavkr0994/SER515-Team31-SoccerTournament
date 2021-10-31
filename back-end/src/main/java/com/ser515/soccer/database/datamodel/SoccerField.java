@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class SoccerField {
     @Id     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private float latitude;
 
     private float longitude;

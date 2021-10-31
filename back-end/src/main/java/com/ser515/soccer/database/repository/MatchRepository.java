@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
-    Optional<Match> findByName(Team team1);
+    Optional<Match> findByName(Team team1 );
 }
