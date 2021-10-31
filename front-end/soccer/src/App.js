@@ -26,7 +26,7 @@ function App() {
           <Route path="/tournaments">
             <Tournaments></Tournaments>
           </Route>
-          <Route path="/tournament/:id">
+          <Route path="/tournament/:name">
             <ATournament></ATournament>
             </Route>
           <Route path="/map">
