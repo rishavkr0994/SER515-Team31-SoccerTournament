@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity @Table
+@Entity @Table(name = "role")
 @NoArgsConstructor @Getter @Setter
 public class Role {
     public enum UserRole { COACH, PLAYER, REFEREE, TOURNAMENT_DIRECTOR,
