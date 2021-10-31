@@ -21,24 +21,22 @@ public class UserDetailsImpl implements UserDetails {
     private String firstName;
     private String lastName;
     private String eMailAddress;
-    private String phoneNo;
 
     public UserDetailsImpl(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                           String firstName, String lastName, String eMailAddress, String phoneNo) {
+                           String firstName, String lastName, String eMailAddress) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMailAddress = eMailAddress;
-        this.phoneNo = phoneNo;
     }
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new UserDetailsImpl(user.getEmailAddress(), user.getPassword(), authorities, user.getFirstName(),
-                user.getLastName(), user.getEmailAddress(), user.getPhoneNo());
+                user.getLastName(), user.getEmailAddress());
     }
 
     @Override public String getUsername() { return username; }
@@ -48,7 +46,6 @@ public class UserDetailsImpl implements UserDetails {
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getEMailAddress() { return eMailAddress; }
-    public String getPhoneNo() { return phoneNo; }
 
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }

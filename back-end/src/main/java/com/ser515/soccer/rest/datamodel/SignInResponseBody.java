@@ -4,7 +4,6 @@ public class SignInResponseBody {
     public String firstName;
     public String lastName;
     public String eMailAddress;
-    public String phoneNo;
     public String role;
     public String jwt;
 

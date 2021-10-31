@@ -29,7 +29,7 @@ public class Tournament {
     private LocalDateTime endDate;
 
     @OneToMany
-    private List<Match> matchList;
+    private List<SoccerMatch> matchList;
 
     @OneToMany
     private List<Team> teamList;

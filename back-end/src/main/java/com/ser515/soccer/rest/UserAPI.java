@@ -1,6 +1,5 @@
 package com.ser515.soccer.rest;
 
-import com.ser515.soccer.database.datamodel.Role;
 import com.ser515.soccer.database.datamodel.User;
 import com.ser515.soccer.database.repository.UserRepository;
 import com.ser515.soccer.rest.datamodel.*;
@@ -33,15 +32,12 @@ public class UserAPI {
     public ResponseEntity<APIResponseBody> signUp(@RequestBody SignUpRequestBody requestBody) {
         if (userRepository.existsByEmailAddress(requestBody.email))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure("The e-mail address is already used"));
-//        else if (userRepository.existsByPhoneNo(requestBody.phoneNo))
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure("The phone no. is already used"));
 
         User user = new User();
         user.setFirstName(requestBody.firstName);
         user.setLastName(requestBody.lastName);
         user.setPassword(encoder.encode(requestBody.password));
         user.setEmailAddress(requestBody.email);
-        user.setPhoneNo(requestBody.phoneNo);
         user.setRole(requestBody.role);
         userRepository.save(user);
 
@@ -66,7 +62,6 @@ public class UserAPI {
         responseBody.firstName = userDetails.getFirstName();
         responseBody.lastName = userDetails.getLastName();
         responseBody.eMailAddress = userDetails.getEMailAddress();
-        responseBody.phoneNo = userDetails.getPhoneNo();
         if (roles.size() != 0)
             responseBody.role = roles.get(0);
         responseBody.jwt = jwt;
