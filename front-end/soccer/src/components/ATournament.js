@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Button,
   Grid,
@@ -7,12 +7,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+
 import Paper from '@mui/material/Paper';
 import {
   BrowserRouter as Router,
@@ -26,6 +21,7 @@ import TLeft from "./TLeft";
 import "./ATournament.css";
 import { Box, maxWidth } from "@mui/system";
 import { useSelector } from "react-redux";
+import Details from './Details';
 
 export default function ATournament() {
   let { name } = useParams();
@@ -66,63 +62,29 @@ export default function ATournament() {
       </Grid>
       <Switch>
         <Route exact path={path}>
-          <Details></Details>
+          <Details name = {name}></Details>
         </Route>
         <Route path={`${path}/:topicId`}>
-          <Topic />
+          <Topic name={name}/>
         </Route>
       </Switch>
     </div>
   );
 }
 
-function Topic() {
+function Topic(props) {
   let { topicId } = useParams();
 
   return (
     <div>
-      {topicId === "details" && <Details></Details>}
-      {topicId === "schduel" && <Schduel></Schduel>}
-      {topicId === "register" && <Register></Register>}
+      {topicId === "details" && <Details name = {props.name}></Details>}
+      {topicId === "schduel" && <Schduel name = {props.name}></Schduel>}
+      {topicId === "register" && <Register name = {props.name}></Register>}
     </div>
   );
 }
 
-function Details() {
-    function createData(key, value) {
-        return { key, value};
-      }
-      
-      const rows = [
-        createData('Tournament name', "tournamentName"),
-        createData('Start day', "10/24/2022"),
-        createData('End day', "12/22/2022"),
-        createData('End of registration', "10/22/2022"),
-        createData('Fee', "600$"),
-        createData('Feild', "this is a location"),
-      ];
-  return (
-    <div className="detail">
-      <TableContainer component={Paper} sx={{ maxWidth:600}}>
-      <Table sx={{ minWidth: 500,maxWidth:700 }} size="small" aria-label="a dense table">
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.key}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.key}
-              </TableCell>
-              <TableCell align="right">{row.value}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
-  );
-}
+
 
 function Schduel() {
   return (
