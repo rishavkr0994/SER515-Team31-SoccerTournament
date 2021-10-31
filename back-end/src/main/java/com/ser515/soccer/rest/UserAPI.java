@@ -5,6 +5,8 @@ import com.ser515.soccer.database.repository.UserRepository;
 import com.ser515.soccer.rest.datamodel.*;
 import com.ser515.soccer.security.jwt.JwtUtils;
 import com.ser515.soccer.security.services.UserDetailsImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin
+@Api(value="User API", description="Rest APIs For User Management")
 @RestController @RequestMapping("/rest/user")
 public class UserAPI {
     @Autowired AuthenticationManager authenticationManager;
@@ -28,6 +30,7 @@ public class UserAPI {
 
     @Autowired UserRepository userRepository;
 
+    @ApiOperation(value = "Register a user with user information")
     @PostMapping("/signup")
     public ResponseEntity<APIResponseBody> signUp(@RequestBody SignUpRequestBody requestBody) {
         if (userRepository.existsByEmailAddress(requestBody.email))
@@ -44,6 +47,7 @@ public class UserAPI {
         return ResponseEntity.ok().body(APIResponseBody.success(null));
     }
 
+    @ApiOperation(value = "Authenticate a user based on username and password and return a JWT")
     @PostMapping("/signin")
     public ResponseEntity<APIResponseBody> signin(@RequestBody SignInRequestBody requestBody) {
 //        requestBody.password = encoder.encode(requestBody.password);
