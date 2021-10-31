@@ -18,3 +18,12 @@
     flex-direction: row;
     margin-right: 120px;
 }
+
+.detail{
+    margin-top: 50px;
+    margin-right: 120px;
+    flex-direction: row;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

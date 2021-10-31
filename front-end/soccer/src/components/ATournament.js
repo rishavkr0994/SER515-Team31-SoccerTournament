@@ -3,10 +3,16 @@ import {
   Grid,
   InputLabel,
   MenuItem,
-  Paper,
   Select,
   TextField,
 } from "@mui/material";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -83,9 +89,37 @@ function Topic() {
 }
 
 function Details() {
+    function createData(key, value) {
+        return { key, value};
+      }
+      
+      const rows = [
+        createData('Tournament name', "tournamentName"),
+        createData('Start day', "10/24/2022"),
+        createData('End day', "12/22/2022"),
+        createData('End of registration', "10/22/2022"),
+        createData('Fee', "600$"),
+        createData('Feild', "this is a location"),
+      ];
   return (
-    <div>
-      <p>showing details</p>
+    <div className="detail">
+      <TableContainer component={Paper} sx={{ maxWidth:600}}>
+      <Table sx={{ minWidth: 500,maxWidth:700 }} size="small" aria-label="a dense table">
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.key}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.key}
+              </TableCell>
+              <TableCell align="right">{row.value}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
     </div>
   );
 }
