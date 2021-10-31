@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping("/rest/user")
+@RestController @RequestMapping("/rest/tournament")
 public class TournamentAPI {
     @Autowired TournamentRepository tournamentRepository;
 
