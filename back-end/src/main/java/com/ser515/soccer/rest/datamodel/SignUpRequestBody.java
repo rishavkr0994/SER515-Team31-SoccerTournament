@@ -8,7 +8,6 @@ public class SignUpRequestBody {
     public String lastName;
     public String email;
     public String password;
-    public String phoneNo;
 
     public SignUpRequestBody() { }
 }

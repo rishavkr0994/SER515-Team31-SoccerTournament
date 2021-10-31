@@ -6,10 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "user", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "emailAddress"),
-        @UniqueConstraint(columnNames = "phoneNo")
-})
+@Entity @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "emailAddress") })
 @NoArgsConstructor @Getter @Setter
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +16,5 @@ public class User {
     private String lastName;
     private String password;
     private String emailAddress;
-    private String phoneNo;
     private Role.UserRole role;
 }
