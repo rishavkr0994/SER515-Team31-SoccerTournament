@@ -1,1 +1,0 @@
-This component will let a user navigate to the field location of the scheduled events.
