@@ -22,4 +22,6 @@ public class Match {
     @ManyToOne
     @JoinColumn(name = "field_id" )
     private SoccerField field;
+
+    private Team team3;
 }

@@ -14,8 +14,6 @@ public class Team {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String name;
-
-    //need change to enum
+    private String name;//need change to enum
     private String type;
 }

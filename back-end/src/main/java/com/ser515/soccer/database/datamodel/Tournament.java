@@ -18,11 +18,11 @@ public class Tournament {
 
     private String name;
     private String iconSrc;
-<<<<<<< HEAD
 
-=======
+
+
     private Type type;
->>>>>>> ac141cf9cbfdcd2f19e7dd8c75f9dd9a5f84dced
+
     private String description;
     private boolean isOnGoing;
 

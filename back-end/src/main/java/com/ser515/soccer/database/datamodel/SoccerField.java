@@ -14,5 +14,7 @@ public class SoccerField {
     private float longitude;
     private String name;
     private String place;
+    private String city;
+    private String country;
 
 }
