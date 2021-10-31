@@ -18,9 +18,6 @@ public class Tournament {
 
     private String name;
     private String iconSrc;
-
-
-
     private Type type;
 
     private String description;
