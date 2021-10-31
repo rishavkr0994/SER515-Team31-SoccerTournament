@@ -6,14 +6,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
-@Getter @Setter @NoArgsConstructor
+@Entity @Getter @Setter @NoArgsConstructor @Table
 public class SoccerField {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    private float latitude;
+
+    private float longitude;
 
     private String name;
 
-    private float latitude;
-    private float longitude;
 }
