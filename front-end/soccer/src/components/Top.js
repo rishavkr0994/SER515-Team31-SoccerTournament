@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import React from "react";
-import GetUser from "../util/GetUser";
+import GetUser from "../utils/GetUser";
 import "./Top.css";
 import UserProfile from "./UserProfile";
 import SignInSignUp from "./SignInSignUp";
