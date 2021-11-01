@@ -20,9 +20,6 @@ export default function Details(props) {
     const userInfo = state.userInfo;
     getData();
     async function getData() {
-        setTimeout(function(){
-            console.log("waiting");
-        },20000)
       const res = await fetch(
         "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
           newName,

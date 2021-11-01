@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { commonStyle, sizeContainer } from '../utils/style';
+import { commonStyle } from '../utils/style';
 const animate1 = keyframes`
 	100% {
 	transform:rotate(360deg)
