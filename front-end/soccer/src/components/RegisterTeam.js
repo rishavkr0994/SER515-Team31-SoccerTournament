@@ -20,7 +20,16 @@ export default function RegisterTeam() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [teamRegister, setTeamRegister] = useState({ type: 0 });
-  const [msg,setMsg] = useState(null)
+  const [msg, setMsg] = useState(null);
+  const handleError = (res) => {
+    setMsg({ error: res.errMsg });
+    setShowError(true);
+    setShowSuccess(false);
+  };
+  const handleSuccess = () =>{
+    setShowSuccess(true);
+    setShowError(false);
+  }
   const handleRegister = () => {
     console.log(teamRegister);
     fetch(
@@ -37,15 +46,12 @@ export default function RegisterTeam() {
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {
-          setMsg({error:res.errMsg})
-          setShowError(true)
+          handleError(res)
           throw new Error(res);
         }
-        setShowSuccess(true);
-        setShowError(false);
+        handleSuccess()
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   };
 
   return (
@@ -154,7 +160,7 @@ export default function RegisterTeam() {
             </div>
             <Button
               variant="contained"
-              sx={{ marginTop: "50px", alignContent: "flex-end" }}
+              sx={{ marginTop: "50px", alignContent: "flex-end",marginRight:"20px" }}
               onClick={handleRegister}
             >
               Submit
