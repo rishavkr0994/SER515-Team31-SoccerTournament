@@ -19,7 +19,19 @@ public class Role {
     @Enumerated(EnumType.STRING )
     private UserRole name;
     private UserRole role;
+    private UserRole fullname;
+    private UserRole email;
+    private UserRole phno;
+
 
     public Role(UserRole name) { this.name = name;
+    }
+    public void Rolerole(UserRole role) { this.role = role;
+    }
+    public void Rolefname(UserRole fullname) { this.role = fullname;
+    }
+    public void Rolefemail(UserRole email) { this.role = email;
+    }
+    public void Rolephno(UserRole phno) { this.phno = phno;
     }
 }

@@ -24,4 +24,8 @@ public class Match {
     private SoccerField field;
 
     private Team team3;
+    private Team team4;
+    private Team team5;
+    private Team team6;
+    private Team team7;
 }
