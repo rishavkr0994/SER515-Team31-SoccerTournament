@@ -13,19 +13,18 @@ import BlockRotateLoading from "./BlockRotateLoading";
 
 export default function Details(props) {
   const state = useSelector((state) => state);
+  const userInfo = state.userInfo;
   const [tournament, setTournament] = useState({ items: [], isLoading: true });
-  const newName = props.name;
 
   useEffect(() => {
-    const userInfo = state.userInfo;
     getData();
     async function getData() {
       const res = await fetch(
         "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
-          newName,
+          props.name,
         {
           headers: {
-            Authorization: userInfo.jwt,
+            "Authorization": userInfo.jwt,
           },
           method: "GET",
         }
@@ -71,10 +70,10 @@ export default function Details(props) {
     );
   return (
     <div className="detail">
-      <TableContainer component={Paper} sx={{ maxWidth: 600 }}>
+      <TableContainer component={Paper} sx={{ maxWidth: 600,marginTop:"50px" }}>
         <Table
           sx={{ minWidth: 500, maxWidth: 700 }}
-          size="small"
+          size="medium"
           aria-label="a dense table"
         >
           <TableBody>

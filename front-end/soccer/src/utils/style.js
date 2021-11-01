@@ -1,5 +1,7 @@
 const commonStyle = {
   margin: 'auto',
+  marginTop:"500px",
+  marginRight:"54%",
   position: 'absolute',
   left: 0,
   right: 0,

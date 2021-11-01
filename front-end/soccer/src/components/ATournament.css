@@ -27,3 +27,19 @@
     display: flex;
     justify-content: center;
 }
+
+.alert{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 120px;
+    width: 90%;
+    max-height: 50px;
+    margin-top: 20px;
+}
+
+.toRight{
+    margin-right: 120px;
+    margin-top: 500px;
+}

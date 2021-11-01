@@ -15,6 +15,7 @@ import TLeft from "./TLeft";
 import "./ATournament.css";
 import Details from './Details';
 import RegisterTeam from './RegisterTeam';
+import BlockRotateLoading from './BlockRotateLoading';
 
 export default function ATournament() {
   let { name } = useParams();
@@ -81,8 +82,8 @@ function Topic(props) {
 
 function Schduel() {
   return (
-    <div>
-      <p>showing schduel</p>
+    <div className="toRight">
+      <BlockRotateLoading></BlockRotateLoading>
     </div>
   );
 }

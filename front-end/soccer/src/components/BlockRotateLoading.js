@@ -44,7 +44,7 @@ const ItemTwo = styled(Item)`
 
 const BlockRotateLoading = ({ style = commonStyle, color, speed, size = 'default' }) => {
   return (
-    <LoadingContainer style={style}>
+    <LoadingContainer style={style} >
       <ItemOne color={color} speed={speed} />
       <ItemTwo color={color} speed={speed} />
     </LoadingContainer>

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
+  Alert,
   Button,
   InputLabel,
   MenuItem,
@@ -7,18 +8,88 @@ import {
   TextField,
 } from "@mui/material";
 
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 import "./FooterAndMain.css";
 import "./ATournament.css";
 import { Box } from "@mui/system";
+import { useSelector } from "react-redux";
 
 export default function RegisterTeam() {
-    return (
+  const state = useSelector((state) => state);
+  const userInfo = state.userInfo;
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [teamRegister, setTeamRegister] = useState({ type: 0 });
+  const [msg,setMsg] = useState(null)
+  const handleRegister = () => {
+    console.log(teamRegister);
+    fetch(
+      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/team/registration",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userInfo.jwt,
+        },
+        method: "POST",
+        body: JSON.stringify(teamRegister),
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (!res.isSuccess) {
+          setMsg({error:res.errMsg})
+          setShowError(true)
+          throw new Error(res);
+        }
+        setShowSuccess(true);
+        setShowError(false);
+      })
+      .catch(() => {
+      });
+  };
+
+  return (
+    <div>
+      {showSuccess && (
+        <div className="alert">
+          <Alert
+            onClose={() => {
+              setShowSuccess(false);
+            }}
+            variant="filled"
+            severity="success"
+            sx={{
+              width: "800px",
+              textAlign: "center",
+            }}
+          >
+            Congradulation! Your Team registered successfully !
+          </Alert>
+        </div>
+      )}
+      {showError && (
+        <div className="alert">
+          <Alert
+            variant="filled"
+            severity="error"
+            onClose={() => {
+              setShowError(false);
+            }}
+            sx={{
+              width: "800px",
+              textAlign: "center",
+            }}
+          >
+            {msg.error}
+          </Alert>
+        </div>
+      )}
+
       <div className="register">
         <Paper
           elevation={3}
           sx={{
-            marginTop: "30px",
+            marginTop: "90px",
             marginRight: "30px",
             minHeight: "400px",
             maxWidth: "700px",
@@ -37,13 +108,36 @@ export default function RegisterTeam() {
             autoComplete="off"
           >
             <div>
-              <TextField required id="outlined-required" label="Team name" />
+              <TextField
+                required
+                id="outlined-required"
+                label="Team name"
+                onChange={(e) => {
+                  setTeamRegister({
+                    name: e.target.value,
+                    type: teamRegister.type,
+                  });
+                }}
+              />
+              <div>
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Team coach"
+                  onChange={(e) => {}}
+                />
+              </div>
               <InputLabel id="demo-label">Type</InputLabel>
               <Select
                 labelId="demo-label"
                 id="demo-label"
                 label="Type"
-                onChange={(e) => {}}
+                defaultValue={0}
+                onChange={(e) => {
+                  setTeamRegister({
+                    type: e.target.value,
+                  });
+                }}
                 sx={{
                   width: "235px",
                 }}
@@ -61,11 +155,13 @@ export default function RegisterTeam() {
             <Button
               variant="contained"
               sx={{ marginTop: "50px", alignContent: "flex-end" }}
+              onClick={handleRegister}
             >
               Submit
             </Button>
           </Box>
         </Paper>
       </div>
-    );
-  }
+    </div>
+  );
+}
