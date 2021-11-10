@@ -28,7 +28,6 @@ export default function CreateTournament() {
       ...tournament,
       [e.target.name]: e.target.value.trim(),
     });
-    console.log(tournament);
   };
 
   const handleDeadline = (e) => {
@@ -54,11 +53,9 @@ export default function CreateTournament() {
 
   const convertBase64 = (file) => {
     let newFile = new File(file, { type: "image" });
-    console.log(newFile instanceof Blob);
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(newFile);
-
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
@@ -70,7 +67,6 @@ export default function CreateTournament() {
   };
 
   async function handleImage(file) {
-    console.log(file);
     convertBase64(file).then((res) => {
       const newT = { ...tournament };
       newT.iconSrc = res;
