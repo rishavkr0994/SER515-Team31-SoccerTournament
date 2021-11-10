@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
@@ -14,8 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
-import { DatePicker, DateRangePicker } from "@mui/lab";
+import { DatePicker } from "@mui/lab";
 
 export default function CreateTournament() {
   const [value, setValue] = React.useState(null);
@@ -23,6 +22,7 @@ export default function CreateTournament() {
   const [endDay, setEndDay] = React.useState(null);
   const inital = {};
   const [tournament, setTournament] = useState(inital);
+
   const handleChange = (e) => {
     setTournament({
       ...tournament,
@@ -30,6 +30,7 @@ export default function CreateTournament() {
     });
     console.log(tournament);
   };
+
   const handleDeadline = (e) => {
     setValue(e);
     const newT = { ...tournament };
@@ -51,10 +52,36 @@ export default function CreateTournament() {
     setTournament(newT);
   };
 
+  const convertBase64 = (file) => {
+    let newFile = new File(file, { type: "image" });
+    console.log(newFile instanceof Blob);
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(newFile);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  async function handleImage(file) {
+    console.log(file);
+    convertBase64(file).then((res) => {
+      const newT = { ...tournament };
+      newT.iconSrc = res;
+      setTournament(newT);
+    });
+  }
+
   console.log(tournament);
   return (
-    <div className="Main" style={{justifyContent:"center",display:"flex" }}>
-      <Card sx={{ width: "80%",height:"90%", marginTop: "50px"}}>
+    <div className="Main" style={{ justifyContent: "center", display: "flex" }}>
+      <Card sx={{ width: "80%", height: "90%", marginTop: "50px" }}>
         <CardContent>
           <Typography
             gutterBottom
@@ -128,20 +155,33 @@ export default function CreateTournament() {
             </Grid>
             <Grid item xs={4}></Grid>
           </Grid>
-          <div style={{ marginTop: "10px",color:"cornflowerblue",fontSize:"20px" }}>
+          <div
+            style={{
+              marginTop: "10px",
+              color: "cornflowerblue",
+              fontSize: "20px",
+            }}
+          >
             Please select a image for the tournament:
           </div>
           <div>
             <DropzoneArea
               acceptedFiles={["image/*"]}
               onChange={(files) => {
+                handleImage(files);
                 console.log(files);
               }}
             ></DropzoneArea>
           </div>
         </CardContent>
-        <CardActions sx={{justifyContent:"center"}}>
-            <Button size="large" variant="contained" sx={{marginBottom:"12px"}}>Create Tournament</Button>
+        <CardActions sx={{ justifyContent: "center" }}>
+          <Button
+            size="large"
+            variant="contained"
+            sx={{ marginBottom: "12px" }}
+          >
+            Create Tournament
+          </Button>
         </CardActions>
       </Card>
     </div>
