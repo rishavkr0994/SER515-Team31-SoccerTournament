@@ -141,6 +141,7 @@ export default function RegisterTeam() {
                 defaultValue={0}
                 onChange={(e) => {
                   setTeamRegister({
+                    name: teamRegister.name,
                     type: e.target.value,
                   });
                 }}

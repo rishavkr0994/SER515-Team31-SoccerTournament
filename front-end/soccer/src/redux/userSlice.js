@@ -6,7 +6,7 @@ const initialState = {
   firstName: "runlin",
   lastName: "Xiao",
   role: "adm",
-  jwt: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb2JvdEBhc3UuZWR1IiwiaWF0IjoxNjM1NzE2ODQ4LCJleHAiOjE2MzU4MDMyNDh9.S5S-8ee2RaR_JIoKEDqrxfg7aoGCxVPIdwRTeZ-IS6bhG7iOXtzOdsO-vbtt2GcYOmkUNhbSbDxwakdetpYmag"
+  jwt: "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyZWFjdC53ZWJhcHBAYXN1LmVkdSIsImlhdCI6MTYzNTc2NjkyOH0.dmAUUXCCDjh2InBCND7-2Unjtpc4YDl2AuYMXOtxFNfkPrQdKBSpK-pmOiCeQjPsGCQjpOnrYj08_30jXGSaxg"
 };
 
 const userSlice = createSlice({
