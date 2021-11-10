@@ -163,22 +163,24 @@ export default function CreateTournament() {
           <div>
             <DropzoneArea
               acceptedFiles={["image/*"]}
+              filesLimit ={1}
               onChange={(files) => {
                 handleImage(files);
-                console.log(files);
               }}
             ></DropzoneArea>
           </div>
         </CardContent>
-        <CardActions sx={{ justifyContent: "center" }}>
-          <Button
-            size="large"
-            variant="contained"
-            sx={{ marginBottom: "12px" }}
-          >
-            Create Tournament
-          </Button>
-        </CardActions>
+        <div>
+          <CardActions sx={{ justifyContent: "center"}}>
+            <Button
+              size="large"
+              variant="contained"
+              sx={{ marginBottom: "12px"}}
+            >
+              Create Tournament
+            </Button>
+          </CardActions>
+        </div>
       </Card>
     </div>
   );
