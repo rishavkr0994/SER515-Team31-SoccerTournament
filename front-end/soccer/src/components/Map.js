@@ -1,8 +1,6 @@
 import React, { Component,useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
-import { GoogleMap, InfoWindow } from "@react-google-maps/api";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const markers = [
