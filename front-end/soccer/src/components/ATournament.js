@@ -16,6 +16,7 @@ import "./ATournament.css";
 import Details from './Details';
 import RegisterTeam from './RegisterTeam';
 import BlockRotateLoading from './BlockRotateLoading';
+import MatchFixture from './MatchFixture';
 
 export default function ATournament() {
   let { name } = useParams();
@@ -83,7 +84,7 @@ function Topic(props) {
 function Schduel() {
   return (
     <div className="toRight">
-      <BlockRotateLoading></BlockRotateLoading>
+      <MatchFixture></MatchFixture>
     </div>
   );
 }
