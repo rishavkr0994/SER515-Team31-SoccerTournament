@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EmailIcon from "@mui/icons-material/Email";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import './MatchFixture.css'
 import {
   Grid,
   Button,
@@ -206,16 +207,16 @@ const rows = [
 export default function MatchFixture() {
   return (
     <div className="Main">
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{marginTop:"30px"}}>
         <Table aria-label="collapsible table">
-          <TableHead>
+          <TableHead className="titleBg" sx={{fontWeight:"900"}}>
             <TableRow>
               <TableCell />
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell align="right">Team1</TableCell>
+              <TableCell align="right">Team2</TableCell>
+              <TableCell align="right">Field</TableCell>
+              <TableCell align="right">whatever</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

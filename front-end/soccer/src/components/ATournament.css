@@ -12,6 +12,16 @@
     margin:20px;
 }
 
+.registerTitle{
+    text-align: center;
+    color: royalblue;
+    font-size: x-large;
+    font-weight:bold;
+    background-image: url('../titleBg.png');
+    background-size: contain;
+    height: 30px;
+}
+
 .register{
     text-align: center;
     justify-content: center;

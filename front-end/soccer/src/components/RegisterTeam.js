@@ -102,8 +102,8 @@ export default function RegisterTeam() {
             minWidth: "450px",
           }}
         >
-          <div className="centerForm">
-            <h>Register your team!</h>
+          <div className="registerTitle">
+            Register your team!
           </div>
           <Box
             component="form"
