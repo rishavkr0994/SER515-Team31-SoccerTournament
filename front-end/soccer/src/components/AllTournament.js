@@ -6,7 +6,7 @@ import './FooterAndMain.css'
 export default function AllTournament(){
     return(
         <div className="Main">
-            <Button variant="text" href="/tournament/create">
+            <Button variant="contained" href="/tournament/create">
               Add Tournament
             </Button>
         </div>
