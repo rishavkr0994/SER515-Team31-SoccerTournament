@@ -14,6 +14,7 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EmailIcon from "@mui/icons-material/Email";
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import {
   Grid,
   Button,
@@ -51,10 +52,13 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
   const [available, setAvailable] = useState(true);
   const [booking, setBooking] = useState(false);
-
+  const price = 20;
+  const [total,setTotal] = useState(0);
   const handleBooking = () => {
     setBooking(true);
   };
+
+  const [order,setOrder] = useState({quantites:"0"})
 
   const handleClose = () => {
     setBooking(false);
@@ -128,7 +132,12 @@ function Row(props) {
                           }}
                           id="ticket"
                           label="Email"
-                          onChange={(e) => {}}
+                          type="email"
+                          onChange={(e) => {
+                            const newOrder = {...order}
+                            newOrder.email = e.target.value;
+                            setOrder(newOrder)
+                          }}
                           sx={{ maxWidth: "300px" }}
                         />
                       </Grid>
@@ -136,9 +145,30 @@ function Row(props) {
                         <TextField
                           id="quantities"
                           label="quantities"
-                          required
                           type="number"
-                          onChange={(e) => {}}
+                          onChange={(e) => {
+                              const newTotal  = price * e.target.value;
+                              setTotal(newTotal);
+                              const newOrder = {...order}
+                              newOrder.quantites = e.target.value;
+                              setOrder(newOrder)
+                          }}
+                        />
+                      </Grid>
+                      <Grid item sx={4}>
+                        <TextField
+                          disabled
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <MonetizationOnIcon></MonetizationOnIcon>
+                              </InputAdornment>
+                            ),
+                          }}
+                          id="ticket"
+                          label="Total Price"
+                          value={total}
+                          sx={{ maxWidth: "300px" }}
                         />
                       </Grid>
                     </Grid>
