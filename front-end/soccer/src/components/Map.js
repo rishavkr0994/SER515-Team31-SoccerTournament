@@ -1,4 +1,4 @@
-import React, { Component,useState } from 'react';
+import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
