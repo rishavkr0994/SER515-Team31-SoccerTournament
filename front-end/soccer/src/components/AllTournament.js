@@ -7,7 +7,7 @@ import { Grid } from '@mui/material';
 
 const rows = [
     {
-        src:"tcard2.jpeg",
+        src:"https://i.ibb.co/p4rPrB5/7ad969eb6be4.png",
         name:"Century Hitters",
         description:"This is a century tournament!!!",
         startDate:["11","22","44"],

@@ -11,10 +11,15 @@ import {
   CardActions,
   CardContent,
   Grid,
+  InputLabel,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/lab";
+import GetUser from "../utils/GetUser";
+import { InputAdornment, MenuItem } from "@material-ui/core";
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 export default function CreateTournament() {
   const [value, setValue] = React.useState(null);
@@ -74,6 +79,24 @@ export default function CreateTournament() {
     });
   }
 
+  const userInfo = GetUser();
+
+  const handleSubmit = () => {
+    fetch(
+      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/registration",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userInfo.jwt,
+        },
+        method: "POST",
+        body: JSON.stringify(tournament),
+      }
+    ).then((res) => {
+      console.log(res);
+    });
+  };
+  console.log(userInfo);
   console.log(tournament);
   return (
     <div className="Main" style={{ justifyContent: "center", display: "flex" }}>
@@ -93,13 +116,14 @@ export default function CreateTournament() {
           </Typography>
           <Grid
             container
+            rowSpacing={2}
             sx={{
               marginTop: "20px",
               display: "flex",
               justifyContent: "center",
             }}
           >
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <TextField
                 required
                 id="standard-number"
@@ -108,7 +132,7 @@ export default function CreateTournament() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <TextField
                 required
                 maxRows={4}
@@ -119,7 +143,7 @@ export default function CreateTournament() {
                 onChange={(e) => handleChange(e)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   renderInput={(props) => <TextField {...props} />}
@@ -129,7 +153,27 @@ export default function CreateTournament() {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={4} sx={{ marginTop: "10px" }}>
+            <Grid item xs={3}>
+              <TextField
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <MonetizationOnIcon></MonetizationOnIcon>
+                    </InputAdornment>
+                  ),
+                }}
+                id="ticket"
+                label="Registration Fee"
+                type="number"
+                onChange={(e) => {
+                  const newT = {...tournament}
+                  newT.registrationFee= e.target.value;
+                  setTournament(newT)
+                }}
+                sx={{ maxWidth: "300px" }}
+              />
+            </Grid>
+            <Grid item xs={3} sx={{ marginTop: "10px" }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   renderInput={(props) => <TextField {...props} />}
@@ -139,7 +183,7 @@ export default function CreateTournament() {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={4} sx={{ marginTop: "10px" }}>
+            <Grid item xs={3} sx={{ marginTop: "10px" }}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DatePicker
                   renderInput={(props) => <TextField {...props} />}
@@ -149,7 +193,52 @@ export default function CreateTournament() {
                 />
               </LocalizationProvider>
             </Grid>
-            <Grid item xs={4}></Grid>
+            <Grid item xs={3}>
+              <InputLabel id="demo-label">Type</InputLabel>
+              <Select
+                labelId="demo-label"
+                id="demo-label"
+                label="Type"
+                defaultValue={0}
+                onChange={(e) => {
+                  const newT = { ...tournament };
+                  newT.type = e.target.value;
+                  setTournament(newT);
+                }}
+                sx={{
+                  width: "235px",
+                }}
+              >
+                <MenuItem value={0}>U16</MenuItem>
+                <MenuItem value={1}>U17</MenuItem>
+                <MenuItem value={2}>U18</MenuItem>
+                <MenuItem value={3}>U19</MenuItem>
+                <MenuItem value={4}>U20</MenuItem>
+                <MenuItem value={5}>U21</MenuItem>
+                <MenuItem value={6}>U22</MenuItem>
+                <MenuItem value={7}>U23</MenuItem>
+              </Select>
+            </Grid>
+            <Grid item xs={3}>
+              <TextField
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <MonetizationOnIcon></MonetizationOnIcon>
+                    </InputAdornment>
+                  ),
+                }}
+                id="ticket"
+                label="Ticket price"
+                type="number"
+                onChange={(e) => {
+                  const newT = {...tournament}
+                  newT.ticketPrice= e.target.value;
+                  setTournament(newT)
+                }}
+                sx={{ maxWidth: "300px",marginTop:"10px" }}
+              />
+            </Grid>
           </Grid>
           <div
             style={{
@@ -163,7 +252,7 @@ export default function CreateTournament() {
           <div>
             <DropzoneArea
               acceptedFiles={["image/*"]}
-              filesLimit ={1}
+              filesLimit={1}
               onChange={(files) => {
                 handleImage(files);
               }}
@@ -171,11 +260,12 @@ export default function CreateTournament() {
           </div>
         </CardContent>
         <div>
-          <CardActions sx={{ justifyContent: "center"}}>
+          <CardActions sx={{ justifyContent: "center" }}>
             <Button
               size="large"
               variant="contained"
-              sx={{ marginBottom: "12px"}}
+              sx={{ marginBottom: "12px" }}
+              onClick={handleSubmit}
             >
               Create Tournament
             </Button>
