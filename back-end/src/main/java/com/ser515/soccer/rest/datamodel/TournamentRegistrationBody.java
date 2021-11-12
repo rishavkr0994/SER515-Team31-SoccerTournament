@@ -1,7 +1,8 @@
 package com.ser515.soccer.rest.datamodel;
 
 import com.ser515.soccer.database.datamodel.Tournament;
-import java.time.LocalDateTime;
+
+import java.time.ZonedDateTime;
 
 public class TournamentRegistrationBody {
     public String name;
@@ -10,10 +11,12 @@ public class TournamentRegistrationBody {
     public String description;
 
     public int registrationFee;
-    public LocalDateTime registrationDeadline;
+    public ZonedDateTime registrationDeadline;
 
-    public LocalDateTime startDate;
-    public LocalDateTime endDate;
+    public ZonedDateTime startDate;
+    public ZonedDateTime endDate;
+
+    public int ticketPrice;
 
     public TournamentRegistrationBody() { }
 
@@ -23,13 +26,14 @@ public class TournamentRegistrationBody {
         tournament.setIconSrc(this.iconSrc);
         tournament.setType(this.type);
         tournament.setDescription(this.description);
-        tournament.setOnGoing(false);
 
         tournament.setRegistrationFee(this.registrationFee);
         tournament.setRegistrationDeadline(this.registrationDeadline);
 
         tournament.setStartDate(this.startDate);
         tournament.setEndDate(this.endDate);
+
+        tournament.setTicketPrice(this.ticketPrice);
 
         return tournament;
     }
