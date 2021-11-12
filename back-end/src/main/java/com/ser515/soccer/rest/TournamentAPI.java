@@ -40,6 +40,10 @@ public class TournamentAPI {
         if (tournamentRepository.existsByName(requestBody.name))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure("The name is already used"));
 
+        try {
+            requestBody.iconSrc = imageHostingServiceInterface.uploadImage(requestBody.iconSrc);
+        } catch (Exception e) { requestBody.iconSrc = null; }
+
         tournamentRepository.save(requestBody.getTournamentInstance());
         return ResponseEntity.ok().body(APIResponseBody.success(null));
     }
