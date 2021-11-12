@@ -111,7 +111,6 @@ function Row(props) {
                   <Dialog
                     open={booking}
                     fullWidth
-                    maxWidth="sm"
                     sx={{ textAlign: "center" }}
                     onClose={handleClose}
                     aria-labelledby="alert-dialog-title"

@@ -16,7 +16,7 @@ const rows = [
         endRegistration:"December 21, 2021",
       },
       {
-        src:"tcard1.png",
+        src:"https://i.ibb.co/p4rPrB5/7ad969eb6be4.png",
         name:"Supersixers League",
         description:"Come and join this excited tournament!",
         startDate:["11","22","44"],
