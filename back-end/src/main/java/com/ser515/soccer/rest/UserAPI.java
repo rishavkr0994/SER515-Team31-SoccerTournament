@@ -11,13 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController @RequestMapping("/rest/user")
 public class UserAPI {
@@ -55,25 +51,18 @@ public class UserAPI {
     @Operation(description = "Authenticate a user based on username and password and return a JWT")
     @PostMapping("/signin")
     public ResponseEntity<APIResponseBody> signin(@RequestBody SignInRequestBody requestBody) {
-//        requestBody.password = encoder.encode(requestBody.password);
-//        System.out.println(requestBody.password);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(requestBody.username, requestBody.password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
 
         SignInResponseBody responseBody = new SignInResponseBody();
         responseBody.firstName = userDetails.getFirstName();
         responseBody.lastName = userDetails.getLastName();
         responseBody.eMailAddress = userDetails.getEMailAddress();
-        if (roles.size() != 0)
-            responseBody.role = roles.get(0);
-        responseBody.jwt = jwt;
+        responseBody.role = userDetails.getRole().toString();
+        responseBody.jwt = jwtUtils.generateJwtToken(userDetails.getUsername(),
+                userDetails.getRole() != User.Role.SYSTEM);
 
         return ResponseEntity.ok().body(APIResponseBody.success(responseBody));
     }

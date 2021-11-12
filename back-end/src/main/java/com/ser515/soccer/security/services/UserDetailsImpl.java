@@ -14,29 +14,31 @@ import java.util.Objects;
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
-    private String username;
-    @JsonIgnore private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final String username;
+    @JsonIgnore private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    private String firstName;
-    private String lastName;
-    private String eMailAddress;
+    private final String firstName;
+    private final String lastName;
+    private final String eMailAddress;
+    private final User.Role role;
 
     public UserDetailsImpl(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                           String firstName, String lastName, String eMailAddress) {
+                           String firstName, String lastName, String eMailAddress, User.Role role) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.firstName = firstName;
         this.lastName = lastName;
         this.eMailAddress = eMailAddress;
+        this.role = role;
     }
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new UserDetailsImpl(user.getEmailAddress(), user.getPassword(), authorities, user.getFirstName(),
-                user.getLastName(), user.getEmailAddress());
+                user.getLastName(), user.getEmailAddress(), user.getRole());
     }
 
     @Override public String getUsername() { return username; }
@@ -46,6 +48,7 @@ public class UserDetailsImpl implements UserDetails {
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getEMailAddress() { return eMailAddress; }
+    public User.Role getRole() { return role; }
 
     @Override public boolean isAccountNonExpired() { return true; }
     @Override public boolean isAccountNonLocked() { return true; }
