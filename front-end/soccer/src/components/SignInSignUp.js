@@ -9,7 +9,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import { useDispatch } from "react-redux";
 import { DialogContentText, InputLabel, MenuItem, Select } from "@mui/material";
-
+import {
+  AwesomeButton,
+  AwesomeButtonProgress,
+  AwesomeButtonSocial,
+} from "react-awesome-button";
+import "react-awesome-button/dist/themes/theme-blue.css";
+import "./awsButton.css";
 export default function SignInSignUp() {
   const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = React.useState(false);
@@ -78,11 +84,10 @@ export default function SignInSignUp() {
         if (!res.isSuccess) {
           throw new Error(res.status);
         }
-        handleClose()
+        handleClose();
         return res;
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   };
   const userLogin = {
     username: "",
@@ -98,21 +103,13 @@ export default function SignInSignUp() {
   };
   return (
     <div>
-      <Button
-        variant="contained"
-        style={SignUpButton}
-        onClick={handleClickOpenLogin}
+      <AwesomeButton
+        type="primary"
+        size = "medium"
+        onPress={handleClickOpenLogin}
       >
         Login
-      </Button>
-
-      <Button
-        variant="contained"
-        style={SignUpButton}
-        onClick={handleClickOpenSignUp}
-      >
-        Sign Up
-      </Button>
+      </AwesomeButton>
 
       <Dialog maxWidth="xs" fullWidth open={openLogin} onClose={handleClose}>
         <DialogTitle sx={{ textAlign: "center", backgroundColor: "lightblue" }}>
@@ -160,7 +157,9 @@ export default function SignInSignUp() {
       </Dialog>
 
       <Dialog maxWidth="xs" fullWidth open={openSignUp} onClose={handleClose}>
-        <DialogTitle sx={{ textAlign: "center", backgroundColor: "lightblue" }}>SignUp</DialogTitle>
+        <DialogTitle sx={{ textAlign: "center", backgroundColor: "lightblue" }}>
+          SignUp
+        </DialogTitle>
         <DialogContent
           sx={{
             margin: "auto",
@@ -196,7 +195,7 @@ export default function SignInSignUp() {
               userSignUp.role = e.target.value;
             }}
             sx={{
-              width:"185px"
+              width: "185px",
             }}
           >
             <MenuItem value={0}>Player</MenuItem>

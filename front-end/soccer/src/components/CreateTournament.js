@@ -7,6 +7,7 @@ import {
   AwesomeButtonSocial,
 } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
+import './awsButton.css'
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { DropzoneArea } from "material-ui-dropzone";
 import "./FooterAndMain.css";
@@ -276,6 +277,7 @@ export default function CreateTournament() {
           <CardActions sx={{ justifyContent: "center" }}>
             <AwesomeButton
               type="primary"
+              className="aws-btn"
               onPress={handleSubmit}
             >
               Create Tournament
