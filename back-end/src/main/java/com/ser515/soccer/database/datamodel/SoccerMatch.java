@@ -1,5 +1,6 @@
 package com.ser515.soccer.database.datamodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ public class SoccerMatch {
     @ManyToOne @JoinColumn(name = "team_2_id")
     private Team team2;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
     private ZonedDateTime time;
 
     @ManyToOne @JoinColumn(name = "field_id")

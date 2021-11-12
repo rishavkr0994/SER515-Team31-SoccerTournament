@@ -1,5 +1,6 @@
 package com.ser515.soccer.database.datamodel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,9 +28,12 @@ public class Tournament {
 
     private int registrationFee;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
     private ZonedDateTime registrationDeadline;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
     private ZonedDateTime startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
     private ZonedDateTime endDate;
 
     private int ticketPrice;
