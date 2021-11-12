@@ -4,23 +4,23 @@ import com.ser515.soccer.database.datamodel.Tournament;
 import com.ser515.soccer.database.repository.TournamentRepository;
 import com.ser515.soccer.rest.datamodel.APIResponseBody;
 import com.ser515.soccer.rest.datamodel.TournamentRegistrationBody;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value="Tournament API", description="Rest APIs For Tournament Management")
+@SecurityRequirement(name = "JWT Based Authentication")
 @RestController @RequestMapping("/rest/tournament")
 public class TournamentAPI {
     @Autowired TournamentRepository tournamentRepository;
 
     // TODO: Convert Response Body To Paged Response Body For Handling Large Tournament Lists With The General Get API
-    @ApiOperation(value = "Get list of all the tournaments or a tournament by name")
     @GetMapping(value ={"", "/{name}"})
+    @Operation(description = "Get list of all the tournaments or a tournament by name")
     public ResponseEntity<Object> get(@PathVariable(required = false) String name) {
         if (name == null) {
             List<Tournament> tournamentList = tournamentRepository.findAll();
@@ -34,7 +34,7 @@ public class TournamentAPI {
         }
     }
 
-    @ApiOperation(value = "Register a tournament with tournament information")
+    @Operation(description = "Register a tournament with tournament information")
     @PostMapping("/registration")
     public ResponseEntity<Object> registration(@RequestBody TournamentRegistrationBody requestBody) {
         if (tournamentRepository.existsByName(requestBody.name))
