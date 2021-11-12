@@ -20,6 +20,7 @@ import { DatePicker } from "@mui/lab";
 import GetUser from "../utils/GetUser";
 import { InputAdornment, MenuItem } from "@material-ui/core";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { fontWeight } from "@mui/system";
 
 export default function CreateTournament() {
   const [value, setValue] = React.useState(null);
@@ -108,9 +109,10 @@ export default function CreateTournament() {
             component="div"
             sx={{
               textAlign: "center",
-              backgroundColor: "cornflowerblue",
               padding: "20px",
+
             }}
+            className="createBg"
           >
             Create Tournament
           </Typography>
@@ -229,7 +231,7 @@ export default function CreateTournament() {
                   ),
                 }}
                 id="ticket"
-                label="Ticket price"
+                label="Ticket Price"
                 type="number"
                 onChange={(e) => {
                   const newT = {...tournament}

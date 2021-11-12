@@ -5,3 +5,8 @@
     margin: 20px;
     margin-right: 40px;
 }
+
+.createBg{
+    background-image: url('../createTbg.png');
+    background-size:contain;
+}
