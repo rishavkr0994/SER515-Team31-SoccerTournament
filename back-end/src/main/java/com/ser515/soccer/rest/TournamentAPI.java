@@ -4,14 +4,18 @@ import com.ser515.soccer.ImageHostingServiceInterface;
 import com.ser515.soccer.database.datamodel.Tournament;
 import com.ser515.soccer.database.repository.TournamentRepository;
 import com.ser515.soccer.rest.datamodel.APIResponseBody;
+import com.ser515.soccer.rest.datamodel.PagedAPIResponseBody;
 import com.ser515.soccer.rest.datamodel.TournamentRegistrationBody;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.time.ZonedDateTime;
 
 @SecurityRequirement(name = "JWT Based Authentication")
 @RestController @RequestMapping("/rest/tournament")
@@ -25,31 +29,47 @@ public class TournamentAPI {
         this.imageHostingServiceInterface = imageHostingServiceInterface;
     }
 
-    // TODO: Convert Response Body To Paged Response Body For Handling Large Tournament Lists With The General Get API
-    @Operation(description = "Get list of all the tournaments or a tournament by name")
-    @GetMapping(value = {"", "/{name}"})
-    public ResponseEntity<Object> get(@PathVariable(required = false) String name) {
-        if (name == null) {
-            List<Tournament> tournamentList = tournamentRepository.findAll();
-            return ResponseEntity.ok().body(APIResponseBody.success(tournamentList));
-        } else {
-            Tournament tournament = tournamentRepository.findByName(name).orElse(null);
-            if (tournament == null)
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(APIResponseBody.failure(
-                        "The tournament name is not valid"));
-            else return ResponseEntity.ok().body(APIResponseBody.success(tournament));
-        }
+    @Operation(description = "Get paginated list of all the tournaments (with optional filters)")
+    @GetMapping("")
+    public ResponseEntity<Object> get(@RequestParam(required = false, value = "page", defaultValue = "0") Integer page,
+                                      @RequestParam(required = false, value = "size", defaultValue = "10") Integer size,
+                                      @RequestParam(required = false, value = "filterUpcoming", defaultValue = "False")
+                                                  Boolean isFilterUpcoming) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("registrationDeadline").descending());
+        Page<Tournament> tournamentList;
+        if (isFilterUpcoming) {
+            tournamentList = tournamentRepository.findByRegistrationDeadlineGreaterThanEqual(ZonedDateTime.now(),
+                    pageRequest);
+        } else tournamentList = tournamentRepository.findAll(pageRequest);
+
+        PagedAPIResponseBody<Tournament> responseBody = new PagedAPIResponseBody<>(tournamentList.getNumber(),
+                tournamentList.getSize(), tournamentList.getTotalPages(), tournamentList.getTotalElements(),
+                tournamentList.getContent());
+        return ResponseEntity.ok().body(responseBody);
+    }
+
+    @Operation(description = "Get tournament information by name")
+    @GetMapping("/{name}")
+    public ResponseEntity<Object> getByName(@PathVariable String name) {
+        Tournament tournament = tournamentRepository.findByName(name).orElse(null);
+        if (tournament == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(APIResponseBody.failure(
+                    "The tournament name is not valid"));
+        else return ResponseEntity.ok().body(APIResponseBody.success(tournament));
     }
 
     @Operation(description = "Register a tournament with tournament information")
     @PostMapping("/registration")
     public ResponseEntity<Object> registration(@RequestBody TournamentRegistrationBody requestBody) {
         if (tournamentRepository.existsByName(requestBody.name))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure("The name is already used"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
+                    "The name is already used"));
 
         try {
             requestBody.iconSrc = imageHostingServiceInterface.uploadImage(requestBody.iconSrc);
-        } catch (Exception e) { requestBody.iconSrc = null; }
+        } catch (Exception e) {
+            requestBody.iconSrc = null;
+        }
 
         tournamentRepository.save(requestBody.getTournamentInstance());
         return ResponseEntity.ok().body(APIResponseBody.success(null));
