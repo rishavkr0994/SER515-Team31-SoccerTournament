@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Entity @Table(uniqueConstraints = { @UniqueConstraint(columnNames = "name") })
@@ -18,19 +18,30 @@ public class Tournament {
 
     private String name;
     private String iconSrc;
+
+    @Enumerated(EnumType.STRING)
     private Type type;
+
+    @Column(length = 1000)
     private String description;
-    private boolean isOnGoing;
 
     private int registrationFee;
-    private LocalDateTime registrationDeadline;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private ZonedDateTime registrationDeadline;
+
+    private ZonedDateTime startDate;
+    private ZonedDateTime endDate;
+
+    private int ticketPrice;
 
     @OneToMany
     private List<SoccerMatch> matchList;
 
     @OneToMany
     private List<Team> teamList;
+
+    private boolean isOnGoing() {
+        return (ZonedDateTime.now().compareTo(startDate) >= 0 &&
+                ZonedDateTime.now().compareTo(endDate) <= 0);
+    }
 }
