@@ -1,21 +1,13 @@
-import React from 'react';
-import {
-  Button,
-  Grid,
-} from "@mui/material";
+import React from "react";
+import { Button, Grid } from "@mui/material";
 
-import {
-  Switch,
-  Route,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import { Switch, Route, useParams, useRouteMatch } from "react-router-dom";
 import "./FooterAndMain.css";
 import TLeft from "./TLeft";
 import "./ATournament.css";
-import Details from './Details';
-import RegisterTeam from './RegisterTeam';
-import BlockRotateLoading from './BlockRotateLoading';
+import Details from "./Details";
+import RegisterTeam from "./RegisterTeam";
+import MatchFixture from "./MatchFixture";
 
 export default function ATournament() {
   let { name } = useParams();
@@ -56,10 +48,10 @@ export default function ATournament() {
       </Grid>
       <Switch>
         <Route exact path={path}>
-          <Details name = {name}></Details>
+          <Details name={name}></Details>
         </Route>
         <Route path={`${path}/:topicId`}>
-          <Topic name={name}/>
+          <Topic name={name} />
         </Route>
       </Switch>
     </div>
@@ -71,19 +63,15 @@ function Topic(props) {
 
   return (
     <div>
-      {topicId === "details" && <Details name = {props.name}></Details>}
-      {topicId === "schduel" && <Schduel name = {props.name}></Schduel>}
-      {topicId === "register" && <RegisterTeam name = {props.name}></RegisterTeam>}
+      {topicId === "details" && <Details name={props.name}></Details>}
+      {topicId === "schduel" && <Schduel name={props.name}></Schduel>}
+      {topicId === "register" && (
+        <RegisterTeam name={props.name}></RegisterTeam>
+      )}
     </div>
   );
 }
 
-
-
 function Schduel() {
-  return (
-    <div className="toRight">
-      <BlockRotateLoading></BlockRotateLoading>
-    </div>
-  );
+  return <MatchFixture></MatchFixture>;
 }

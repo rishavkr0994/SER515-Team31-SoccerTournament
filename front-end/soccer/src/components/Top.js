@@ -14,7 +14,7 @@ export default function Top() {
             <img className="imgCss" src={require("../visit.png")} alt=""></img>
           </div>
         </Grid>
-        <Grid item xs={3} sx={{textAlign:"left",marginLeft:"-110px"}}>
+        <Grid item xs={3} sx={{textAlign:"left"}}>
           <div>
             <h1>ASU Soccer</h1>
           </div>
