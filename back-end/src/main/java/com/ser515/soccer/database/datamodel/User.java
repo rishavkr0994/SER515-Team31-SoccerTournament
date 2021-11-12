@@ -15,10 +15,10 @@ public class User {
         REFEREE_DIRECTOR,
         FIELD_DIRECTOR,
         VOLUNTEER_DIRECTOR,
-        GUEST
+        SYSTEM
     }
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String firstName;
