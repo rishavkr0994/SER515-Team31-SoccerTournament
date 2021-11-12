@@ -4,17 +4,18 @@ import GetUser from "../utils/GetUser";
 import "./Top.css";
 import UserProfile from "./UserProfile";
 import SignInSignUp from "./SignInSignUp";
+import Share from './Share'
 
 export default function Top() {
   return (
     <div className="TopCss">
       <Grid container alignItems="center">
-        <Grid item xs={2} sx={{alignItems:"left"}}>
+        <Grid item xs={2} sx={{ alignItems: "left" }}>
           <div>
             <img className="imgCss" src={require("../visit.png")} alt=""></img>
           </div>
         </Grid>
-        <Grid item xs={3} sx={{textAlign:"left"}}>
+        <Grid item xs={3} sx={{ textAlign: "left" }}>
           <div>
             <h1>ASU Soccer</h1>
           </div>
@@ -22,7 +23,7 @@ export default function Top() {
         <Grid item xs={4}>
           {" "}
         </Grid>
-        <Grid item xs={2} sx={{alignItems:"right"}}>
+        <Grid item xs={3} sx={{ alignItems: "right" }}>
           <TopLeft></TopLeft>
         </Grid>
       </Grid>
@@ -33,8 +34,26 @@ export default function Top() {
 function TopLeft() {
   const userInfo = GetUser();
   if (userInfo.isLoggedIn) {
-    return <UserProfile></UserProfile>;
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Share></Share>
+        </Grid>
+        <Grid item xs={12}>
+          <UserProfile></UserProfile>
+        </Grid>
+      </Grid>
+    );
   } else {
-    return <SignInSignUp></SignInSignUp>;
+    return(
+      <Grid container spacing={8}>
+        <Grid item xs={12}>
+          <Share></Share>
+        </Grid>
+        <Grid item xs={12}>
+        <SignInSignUp></SignInSignUp>;
+        </Grid>
+      </Grid>
+    );
   }
 }

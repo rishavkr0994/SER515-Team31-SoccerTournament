@@ -7,7 +7,7 @@
     height: 100px;
     width: 100px;
     margin-left: 50px;
-    margin-top: 10px;
+
 }
 
 .login{
@@ -16,6 +16,5 @@
 }
 
 .topLeft{
-    justify-content: center;
-    margin-top: 10px;
+    /* justify-content: center; */
 }

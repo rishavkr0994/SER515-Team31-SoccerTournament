@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import {
+  AwesomeButton,
+  AwesomeButtonProgress,
+  AwesomeButtonSocial,
+} from 'react-awesome-button';
+import 'react-awesome-button/dist/themes/theme-blue.css';
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import { DropzoneArea } from "material-ui-dropzone";
 import "./FooterAndMain.css";
@@ -93,10 +99,15 @@ export default function CreateTournament() {
         method: "POST",
         body: JSON.stringify(tournament),
       }
-    ).then((res) => {
-      console.log(res);
-    });
-  };
+    )
+    .then((res) => res.json())
+    .then((res) => {
+      if (!res.isSuccess) {
+        throw new Error(res);
+      }
+    })
+    .catch(() => {});
+};
   console.log(userInfo);
   console.log(tournament);
   return (
@@ -263,14 +274,12 @@ export default function CreateTournament() {
         </CardContent>
         <div>
           <CardActions sx={{ justifyContent: "center" }}>
-            <Button
-              size="large"
-              variant="contained"
-              sx={{ marginBottom: "12px" }}
-              onClick={handleSubmit}
+            <AwesomeButton
+              type="primary"
+              onPress={handleSubmit}
             >
               Create Tournament
-            </Button>
+            </AwesomeButton>
           </CardActions>
         </div>
       </Card>
