@@ -1,5 +1,6 @@
 package com.ser515.soccer.rest;
 
+import com.ser515.soccer.ImageHostingServiceInterface;
 import com.ser515.soccer.database.datamodel.Tournament;
 import com.ser515.soccer.database.repository.TournamentRepository;
 import com.ser515.soccer.rest.datamodel.APIResponseBody;
@@ -16,10 +17,12 @@ import java.util.List;
 @RestController @RequestMapping("/rest/tournament")
 public class TournamentAPI {
     final TournamentRepository tournamentRepository;
+    final ImageHostingServiceInterface imageHostingServiceInterface;
 
     public TournamentAPI(TournamentRepository tournamentRepository,
                          ImageHostingServiceInterface imageHostingServiceInterface) {
         this.tournamentRepository = tournamentRepository;
+        this.imageHostingServiceInterface = imageHostingServiceInterface;
     }
 
     // TODO: Convert Response Body To Paged Response Body For Handling Large Tournament Lists With The General Get API
