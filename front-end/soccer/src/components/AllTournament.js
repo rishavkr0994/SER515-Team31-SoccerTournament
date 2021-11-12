@@ -1,13 +1,14 @@
-import { Grid } from '@material-ui/core';
 import { Button } from '@mui/material';
 import React from 'react';
+import Pagination from '@mui/material/Pagination';
 import './FooterAndMain.css'
 import TournamentCard from './TournamentCard';
+import { Grid } from '@mui/material';
 
 const rows = [
     {
         src:"tcard2.jpeg",
-        name:"Century Hitters Tournament",
+        name:"Century Hitters",
         description:"This is a century tournament!!!",
         startDate:["11","22","44"],
         endDtate:["00","11","22"],
@@ -34,7 +35,7 @@ const rows = [
         endRegistration:"December 21, 2021"
       },{
         src:"tcard2.jpeg",
-        name:"Century Hitters Tournament",
+        name:"Century Hitters",
         description:"This is a century tournament!!!",
         startDate:["11","22","44"],
         endDtate:["00","11","22"],
@@ -61,7 +62,7 @@ const rows = [
         endRegistration:"December 21, 2021"
       },{
         src:"tcard2.jpeg",
-        name:"Century Hitters Tournament",
+        name:"Century Hitters",
         description:"This is a century tournament!!!",
         startDate:["11","22","44"],
         endDtate:["00","11","22"],
@@ -92,17 +93,19 @@ const rows = [
 
 export default function AllTournament(){
     return(
-        <div className="Main" style={{marginTop:"30px"}}>
+        <div className="Main" style={{marginTop:"30px", justifyContent:"center"}}>
             <div style={{height:"30px"}}>
                 </div>
-            <Grid container spacing={3}>
+            <Grid container spacing={6}>
             {rows.map((row) => (
-                <Grid item sx={3}>
+            <Grid item sx={{width:"20%"}}>
               <TournamentCard key={row.name} tournament={row} />
-                </Grid>
+              </Grid>
+
             ))}
             </Grid>
 
+            <Pagination count={10} variant="outlined" color="secondary" sx={{ display:"flex",justifyContent:"center",marginTop:"25px"}}/>
             <Button variant="contained" href="/tournament/create">
               Add Tournament
             </Button>

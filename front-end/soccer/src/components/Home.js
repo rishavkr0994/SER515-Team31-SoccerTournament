@@ -7,7 +7,7 @@ export default function Home() {
     <div className="Main">
       <h1 className="Coming"> Upcoming Tournaments</h1>
       <Container maxWidth="xl">
-        <Grid container spacing={2}>
+        <Grid container spacing={12}>
           <Grid item xs={4}>
             <TournamentCard
             tournament={{

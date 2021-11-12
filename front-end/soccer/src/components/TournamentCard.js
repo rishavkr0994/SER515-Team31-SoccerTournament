@@ -9,7 +9,7 @@ import './TournamentCard.css'
 
 export default function TournamentCard(props) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{width:"100%",height:"100%",maxWidth:"300px"}}>
         { props.tournament.isOnGoing === "true" &&
             <img className="Fire" src="fire.gif" alt="" height="60" />
         }
