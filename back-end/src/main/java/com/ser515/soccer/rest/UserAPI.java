@@ -5,7 +5,6 @@ import com.ser515.soccer.database.repository.UserRepository;
 import com.ser515.soccer.rest.datamodel.*;
 import com.ser515.soccer.security.jwt.JwtUtils;
 import com.ser515.soccer.security.services.UserDetailsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +21,19 @@ import java.util.stream.Collectors;
 
 @RestController @RequestMapping("/rest/user")
 public class UserAPI {
-    @Autowired AuthenticationManager authenticationManager;
-    @Autowired JwtUtils jwtUtils;
-    @Autowired PasswordEncoder encoder;
+    final AuthenticationManager authenticationManager;
+    final JwtUtils jwtUtils;
+    final PasswordEncoder encoder;
 
-    @Autowired UserRepository userRepository;
+    final UserRepository userRepository;
+
+    public UserAPI(AuthenticationManager authenticationManager, JwtUtils jwtUtils, PasswordEncoder encoder,
+                   UserRepository userRepository) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.encoder = encoder;
+        this.userRepository = userRepository;
+    }
 
     @Operation(description = "Register a user with user information")
     @PostMapping("/signup")

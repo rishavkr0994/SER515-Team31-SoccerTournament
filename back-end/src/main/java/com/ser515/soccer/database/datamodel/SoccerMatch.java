@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity @Table
 @Getter @Setter @NoArgsConstructor
@@ -19,7 +19,7 @@ public class SoccerMatch {
     @ManyToOne @JoinColumn(name = "team_2_id")
     private Team team2;
 
-    private LocalDateTime time;
+    private ZonedDateTime time;
 
     @ManyToOne @JoinColumn(name = "field_id")
     private SoccerField field;

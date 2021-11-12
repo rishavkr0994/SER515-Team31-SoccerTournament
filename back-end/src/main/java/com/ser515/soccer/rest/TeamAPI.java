@@ -3,7 +3,6 @@ package com.ser515.soccer.rest;
 import com.ser515.soccer.database.repository.TeamRepository;
 import com.ser515.soccer.rest.datamodel.APIResponseBody;
 import com.ser515.soccer.rest.datamodel.TeamRegistrationRequestBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @SecurityRequirement(name = "JWT Based Authentication")
 @RestController @RequestMapping("/rest/team")
 public class TeamAPI {
-    @Autowired TeamRepository teamRepository;
+    final TeamRepository teamRepository;
+
+    public TeamAPI(TeamRepository teamRepository, TournamentRepository tournamentRepository) {
+        this.teamRepository = teamRepository;
+    }
 
     @Operation(description = "Register a team with team information")
     @PostMapping("/registration")
