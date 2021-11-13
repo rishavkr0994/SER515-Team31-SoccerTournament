@@ -11,8 +11,6 @@ import { useDispatch } from "react-redux";
 import { DialogContentText, InputLabel, MenuItem, Select } from "@mui/material";
 import {
   AwesomeButton,
-  AwesomeButtonProgress,
-  AwesomeButtonSocial,
 } from "react-awesome-button";
 import "react-awesome-button/dist/themes/theme-blue.css";
 import "./awsButton.css";
