@@ -213,7 +213,7 @@ export default function CreateTournament() {
                 labelId="demo-label"
                 id="demo-label"
                 label="Type"
-                defaultValue={0}
+                defaultValue="U16"
                 onChange={(e) => {
                   const newT = { ...tournament };
                   newT.type = e.target.value;
@@ -223,14 +223,14 @@ export default function CreateTournament() {
                   width: "235px",
                 }}
               >
-                <MenuItem value={0}>U16</MenuItem>
-                <MenuItem value={1}>U17</MenuItem>
-                <MenuItem value={2}>U18</MenuItem>
-                <MenuItem value={3}>U19</MenuItem>
-                <MenuItem value={4}>U20</MenuItem>
-                <MenuItem value={5}>U21</MenuItem>
-                <MenuItem value={6}>U22</MenuItem>
-                <MenuItem value={7}>U23</MenuItem>
+                <MenuItem value="U16">U16</MenuItem>
+                <MenuItem value="U17">U17</MenuItem>
+                <MenuItem value="U18">U18</MenuItem>
+                <MenuItem value="U19">U19</MenuItem>
+                <MenuItem value="U20">U20</MenuItem>
+                <MenuItem value="U21">U21</MenuItem>
+                <MenuItem value="U22">U22</MenuItem>
+                <MenuItem value="U23">U23</MenuItem>
               </Select>
             </Grid>
             <Grid item xs={3}>

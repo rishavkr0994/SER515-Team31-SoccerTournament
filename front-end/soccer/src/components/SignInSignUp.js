@@ -151,8 +151,8 @@ export default function SignInSignUp() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleLogin}>Login</Button>
+          <Button variant="contained" onClick={handleClose}>Cancel</Button>
+          <Button variant="contained" onClick={handleLogin}>Login</Button>
         </DialogActions>
       </Dialog>
 
