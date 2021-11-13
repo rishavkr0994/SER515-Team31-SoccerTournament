@@ -24,7 +24,7 @@ export default function Details(props) {
           props.name,
         {
           headers: {
-            "Authorization": userInfo.jwt,
+            Authorization: userInfo.jwt,
           },
           method: "GET",
         }
@@ -43,10 +43,10 @@ export default function Details(props) {
         data.registrationDeadline[0];
       setTournament({
         items: data,
-        startDate:startDay,
-        endDate:endDay,
-        registrationDeadline:registrationDeadline,
-        isLoading:false
+        startDate: startDay,
+        endDate: endDay,
+        registrationDeadline: registrationDeadline,
+        isLoading: false,
       });
     }
   }, [setTournament]);
@@ -64,13 +64,13 @@ export default function Details(props) {
     createData("Feild", "this is a location"),
     createData("type", tournament.items.type),
   ];
-  if (tournament.isLoading)
-    return (
-      <BlockRotateLoading></BlockRotateLoading>
-    );
+  if (tournament.isLoading) return <BlockRotateLoading></BlockRotateLoading>;
   return (
     <div className="detail">
-      <TableContainer component={Paper} sx={{ maxWidth: 600,marginTop:"50px" }}>
+      <TableContainer
+        component={Paper}
+        sx={{ maxWidth: 600, marginTop: "50px" }}
+      >
         <Table
           sx={{ minWidth: 500, maxWidth: 700 }}
           size="medium"
