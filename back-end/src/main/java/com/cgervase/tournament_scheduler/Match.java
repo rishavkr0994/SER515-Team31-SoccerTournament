@@ -36,6 +36,13 @@ public class Match {
 		return winner; // return winner of the match
 	}
 
+	public Player getP1() {
+		return p1;
+	}
+	public Player getP2() {
+		return p2;
+	}
+
 	public Player getWinner() {
 		return winner;
 	}
