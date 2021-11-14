@@ -7,6 +7,7 @@ import com.ser515.soccer.security.jwt.JwtUtils;
 import com.ser515.soccer.security.services.UserDetailsImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,10 +33,12 @@ public class UserAPI {
     }
 
     @Operation(description = "Register a user with user information")
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponseBody> signUp(@RequestBody SignUpRequestBody requestBody) {
         if (userRepository.existsByEmailAddress(requestBody.email))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure("The e-mail address is already used"));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
+                    "The e-mail address is already used"));
 
         User user = new User();
         user.setFirstName(requestBody.firstName);
@@ -49,7 +52,8 @@ public class UserAPI {
     }
 
     @Operation(description = "Authenticate a user based on username and password and return a JWT")
-    @PostMapping("/signin")
+    @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponseBody> signin(@RequestBody SignInRequestBody requestBody) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(requestBody.username, requestBody.password));

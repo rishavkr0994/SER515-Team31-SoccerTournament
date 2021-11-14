@@ -7,6 +7,7 @@ import com.ser515.soccer.rest.datamodel.AddSoccerFieldRequestBody;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class SoccerFieldAPI {
 
     // TODO: Convert Response Body To Paged Response Body For Handling Large Tournament Lists With The General Get API
     @Operation(description = "Get list of all the soccer fields or a soccer field by name")
-    @GetMapping(value = {"", "/{name}"})
+    @GetMapping(value = {"", "/{name}"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> get(@PathVariable(required = false) String name) {
         if (name == null) {
             List<SoccerField> soccerFieldList = soccerFieldRepository.findAll();
@@ -38,12 +39,13 @@ public class SoccerFieldAPI {
     }
 
     @Operation(description = "Add a soccer field information to database")
-    @PostMapping("")
-    public ResponseEntity<Object> get(@RequestBody AddSoccerFieldRequestBody requestBody) {
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> add(@RequestBody AddSoccerFieldRequestBody requestBody) {
         if (soccerFieldRepository.existsByName(requestBody.name))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
                     "The field name cannot be used"));
-        soccerFieldRepository.save(requestBody.getSoccerFieldInstance());
+        soccerFieldRepository.save(requestBody.createSoccerFieldInstance());
         return ResponseEntity.ok().body(APIResponseBody.success(null));
     }
 }

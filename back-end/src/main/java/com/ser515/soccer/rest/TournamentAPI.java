@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +31,8 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Get paginated list of all the tournaments (with optional filters)")
-    @GetMapping("")
     public ResponseEntity<Object> get(@RequestParam(required = false, value = "page", defaultValue = "0") Integer page,
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
                                       @RequestParam(required = false, value = "size", defaultValue = "10") Integer size,
                                       @RequestParam(required = false, value = "filterUpcoming", defaultValue = "False")
                                                   Boolean isFilterUpcoming) {
@@ -49,7 +50,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Get tournament information by name")
-    @GetMapping("/{name}")
+    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getByName(@PathVariable String name) {
         Tournament tournament = tournamentRepository.findByName(name).orElse(null);
         if (tournament == null)
@@ -59,7 +60,8 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Register a tournament with tournament information")
-    @PostMapping("/registration")
+    @PostMapping(value = "/registration", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registration(@RequestBody TournamentRegistrationBody requestBody) {
         if (tournamentRepository.existsByName(requestBody.name))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
@@ -71,7 +73,7 @@ public class TournamentAPI {
             requestBody.iconSrc = null;
         }
 
-        tournamentRepository.save(requestBody.getTournamentInstance());
+        tournamentRepository.save(requestBody.createTournamentInstance());
         return ResponseEntity.ok().body(APIResponseBody.success(null));
     }
 }
