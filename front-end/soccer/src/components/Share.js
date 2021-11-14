@@ -16,7 +16,7 @@ export default function Share() {
 
           </Grid>
           <Grid item xs={4}>
-          <AwesomeButtonSocial type="instagram"></AwesomeButtonSocial>
+          <AwesomeButtonSocial url="https://www.instagram.com/runlinxiao/" type="instagram"></AwesomeButtonSocial>
           </Grid>
         </Grid>
     </div>
