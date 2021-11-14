@@ -9,9 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import { useDispatch } from "react-redux";
 import { DialogContentText } from "@mui/material";
-import {
-  AwesomeButton,
-} from "react-awesome-button";
+import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/themes/theme-blue.css";
 import "./awsButton.css";
 export default function SignInSignUp() {
@@ -27,15 +25,17 @@ export default function SignInSignUp() {
     setOpenLogin(false);
   };
 
-
   const handleLogin = () => {
-    fetch("http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/user/signin", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(userLogin),
-    })
+    fetch(
+      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/user/signin",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(userLogin),
+      }
+    )
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {
@@ -67,7 +67,7 @@ export default function SignInSignUp() {
     <div>
       <AwesomeButton
         type="primary"
-        size = "medium"
+        size="medium"
         onPress={handleClickOpenLogin}
       >
         Login
@@ -113,8 +113,12 @@ export default function SignInSignUp() {
           />
         </DialogContent>
         <DialogActions>
-          <Button variant="contained" onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleLogin}>Login</Button>
+          <Button variant="contained" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="contained" onClick={handleLogin}>
+            Login
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

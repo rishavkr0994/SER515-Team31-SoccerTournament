@@ -38,7 +38,7 @@ export default function TournamentCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" href={"/tournament/get/" + props.tournament.name}>Learn More</Button>
+        <Button  size="small" href={"/tournament/get/" + props.tournament.name}>Learn More</Button>
       </CardActions>
     </Card>
   );
