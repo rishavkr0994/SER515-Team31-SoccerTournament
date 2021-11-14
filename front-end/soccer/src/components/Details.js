@@ -8,12 +8,11 @@ import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import "./FooterAndMain.css";
 import "./ATournament.css";
-import { useSelector } from "react-redux";
 import BlockRotateLoading from "./BlockRotateLoading";
+import GetUser from "../utils/GetUser";
 
 export default function Details(props) {
-  const state = useSelector((state) => state);
-  const userInfo = state.userInfo;
+  const userInfo = GetUser()
   const [tournament, setTournament] = useState({ items: [], isLoading: true });
 
   useEffect(() => {
@@ -31,21 +30,8 @@ export default function Details(props) {
       );
       const responseData = await res.json();
       const data = responseData.data;
-      const startDay =
-        data.startDate[1] + "/" + data.startDate[2] + "/" + data.startDate[0];
-      const endDay =
-        data.endDate[1] + "/" + data.endDate[2] + "/" + data.endDate[0];
-      const registrationDeadline =
-        data.registrationDeadline[1] +
-        "/" +
-        data.registrationDeadline[2] +
-        "/" +
-        data.registrationDeadline[0];
       setTournament({
         items: data,
-        startDate: startDay,
-        endDate: endDay,
-        registrationDeadline: registrationDeadline,
         isLoading: false,
       });
     }

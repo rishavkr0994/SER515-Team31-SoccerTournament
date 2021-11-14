@@ -17,7 +17,7 @@ export default function TournamentCard(props) {
         component="img"
         height="160"
         alt="green iguana"
-        image={props.tournament.src}
+        image={props.tournament.iconSrc}
       />
       <CardContent
         sx={{
@@ -25,16 +25,16 @@ export default function TournamentCard(props) {
         }}
       >
         <Typography gutterBottom variant="h5" component="div">
-          {props.tournament.name.length <=20 ? props.tournament.name : props.tournament.name.substring(0,20)+"..."}
+          {props.tournament.name.length <=16 ? props.tournament.name : props.tournament.name.substring(0,16)+"..."}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          { props.tournament.description.length<=30 ? props.tournament.description : props.tournament.description.substring(0,30)+"..."}
+          { props.tournament.description.length<=26 ? props.tournament.description : props.tournament.description.substring(0,26)+"..."}
         </Typography>
         <Typography variant="body1" color="green">
-          {props.tournament.timeRange}
+          {props.tournament.startDate}-{props.tournament.endDate}
         </Typography>
         <Typography variant="body2" color="red">
-          Registration end at: {props.tournament.endRegistration}
+          Registration end at: {props.tournament.registrationDeadline}
         </Typography>
       </CardContent>
       <CardActions>

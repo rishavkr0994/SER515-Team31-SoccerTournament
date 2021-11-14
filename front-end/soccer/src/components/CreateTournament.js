@@ -3,8 +3,6 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import {
   AwesomeButton,
-  AwesomeButtonProgress,
-  AwesomeButtonSocial,
 } from 'react-awesome-button';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import './awsButton.css'
@@ -27,7 +25,6 @@ import { DatePicker } from "@mui/lab";
 import GetUser from "../utils/GetUser";
 import { InputAdornment, MenuItem } from "@material-ui/core";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import { fontWeight } from "@mui/system";
 
 export default function CreateTournament() {
   const [value, setValue] = React.useState(null);
@@ -82,6 +79,8 @@ export default function CreateTournament() {
   async function handleImage(file) {
     convertBase64(file).then((res) => {
       const newT = { ...tournament };
+      const index = res.indexOf("base64,")+7;
+       res = res.substring(index)
       newT.iconSrc = res;
       setTournament(newT);
     });
