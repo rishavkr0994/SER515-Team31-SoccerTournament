@@ -31,19 +31,19 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Get paginated list of all the tournaments (with optional filters)")
-    public ResponseEntity<Object> get(@RequestParam(required = false, value = "page", defaultValue = "0") Integer page,
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> get(@RequestParam(required = false, value = "page", defaultValue = "1") Integer page,
                                       @RequestParam(required = false, value = "size", defaultValue = "10") Integer size,
                                       @RequestParam(required = false, value = "filterUpcoming", defaultValue = "False")
                                                   Boolean isFilterUpcoming) {
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.by("registrationDeadline").descending());
+        PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by("registrationDeadline").descending());
         Page<Tournament> tournamentList;
         if (isFilterUpcoming) {
             tournamentList = tournamentRepository.findByRegistrationDeadlineGreaterThanEqual(ZonedDateTime.now(),
                     pageRequest);
         } else tournamentList = tournamentRepository.findAll(pageRequest);
 
-        PagedAPIResponseBody<Tournament> responseBody = new PagedAPIResponseBody<>(tournamentList.getNumber(),
+        PagedAPIResponseBody<Tournament> responseBody = new PagedAPIResponseBody<>(tournamentList.getNumber() + 1,
                 tournamentList.getSize(), tournamentList.getTotalPages(), tournamentList.getTotalElements(),
                 tournamentList.getContent());
         return ResponseEntity.ok().body(responseBody);
@@ -54,7 +54,7 @@ public class TournamentAPI {
     public ResponseEntity<Object> getByName(@PathVariable String name) {
         Tournament tournament = tournamentRepository.findByName(name).orElse(null);
         if (tournament == null)
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(APIResponseBody.failure(
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
                     "The tournament name is not valid"));
         else return ResponseEntity.ok().body(APIResponseBody.success(tournament));
     }

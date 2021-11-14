@@ -1,6 +1,7 @@
 package com.ser515.soccer.database.datamodel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 public class Tournament {
     public enum Type { U16, U17, U18, U19, U20, U21, U22, U23 }
 
+    @JsonIgnore
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -28,19 +30,21 @@ public class Tournament {
 
     private int registrationFee;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm:ss")
     private ZonedDateTime registrationDeadline;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private ZonedDateTime startDate;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM d yyyy HH:mm:ss (zzzz)")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private ZonedDateTime endDate;
 
     private int ticketPrice;
 
+    @JsonIgnore
     @OneToMany
     private List<SoccerMatch> matchList;
 
+    @JsonIgnore
     @OneToMany
     private List<Team> teamList;
 
