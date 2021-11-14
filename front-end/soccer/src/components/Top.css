@@ -7,15 +7,10 @@
     height: 100px;
     width: 100px;
     margin-left: 50px;
-    margin-top: 10px;
+
 }
 
 .login{
     justify-content: center;
     color: darkgray;
-}
-
-.topLeft{
-    justify-content: center;
-    margin-top: 10px;
 }

@@ -14,7 +14,7 @@ import "./ATournament.css";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 
-export default function RegisterTeam() {
+export default function RegisterTeam(props) {
   const state = useSelector((state) => state);
   const userInfo = state.userInfo;
   const [showSuccess, setShowSuccess] = useState(false);
@@ -121,6 +121,7 @@ export default function RegisterTeam() {
                 onChange={(e) => {
                   setTeamRegister({
                     name: e.target.value,
+                    tournamentName:props.name,
                     type: teamRegister.type,
                   });
                 }}
