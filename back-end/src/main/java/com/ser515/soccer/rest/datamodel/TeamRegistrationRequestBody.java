@@ -10,7 +10,7 @@ public class TeamRegistrationRequestBody {
 
     public TeamRegistrationRequestBody() { }
 
-    public Team getTeamInstance(Tournament tournament) {
+    public Team createTeamInstance(Tournament tournament) {
         Team team = new Team();
         team.setName(this.teamName);
         team.setType(this.type);

@@ -12,7 +12,7 @@ public class AddSoccerFieldRequestBody {
 
     public AddSoccerFieldRequestBody() { }
 
-    public SoccerField getSoccerFieldInstance() {
+    public SoccerField createSoccerFieldInstance() {
         SoccerField soccerField = new SoccerField();
         soccerField.setName(this.name);
         soccerField.setLatitude(this.latitude);

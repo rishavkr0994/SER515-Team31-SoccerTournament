@@ -9,6 +9,7 @@ import com.ser515.soccer.rest.datamodel.TeamRegistrationRequestBody;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,8 @@ public class TeamAPI {
     }
 
     @Operation(description = "Register a team with team information")
-    @PostMapping("/registration")
+    @PostMapping(value = "/registration", consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registration(@RequestBody TeamRegistrationRequestBody requestBody) {
         Tournament tournament = tournamentRepository.findByName(requestBody.tournamentName).orElse(null);
         if (tournament == null)
@@ -38,7 +40,7 @@ public class TeamAPI {
         if (team != null && team.getTournament().getId() == tournament.getId())
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
                     "The team name cannot be used"));
-        team = requestBody.getTeamInstance(tournament);
+        team = requestBody.createTeamInstance(tournament);
         teamRepository.save(team);
 
         tournament.getTeamList().add(team);

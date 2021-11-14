@@ -20,7 +20,7 @@ public class TournamentRegistrationBody {
 
     public TournamentRegistrationBody() { }
 
-    public Tournament getTournamentInstance() {
+    public Tournament createTournamentInstance() {
         Tournament tournament = new Tournament();
         tournament.setName(this.name);
         tournament.setIconSrc(this.iconSrc);
