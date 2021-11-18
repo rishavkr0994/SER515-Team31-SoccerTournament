@@ -8,10 +8,33 @@ import "./ATournament.css";
 import Details from "./Details";
 import RegisterTeam from "./RegisterTeam";
 import MatchFixture from "./MatchFixture";
+import GetUser from "../utils/GetUser";
 
-export default function ATournament() {
+export default function ATournament(props) {
   let { name } = useParams();
   let { path, url } = useRouteMatch();
+  const userInfo = GetUser();
+
+  const handleGenerate = () => {
+    fetch(
+      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
+        name +
+        "/fixtures",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: userInfo.jwt,
+        },
+        method: "POST",
+      }
+    ).then((res)=>res.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="Main">
@@ -34,9 +57,11 @@ export default function ATournament() {
             Register
           </Button>
         </Grid>
-        {/* <Grid item xs={2}>
-            <Button></Button>
-        </Grid> */}
+        <Grid item xs={2}>
+          <Button variant="contained" onClick={(e) => handleGenerate()}>
+            Generate Match Fixture
+          </Button>
+        </Grid>
       </Grid>
       <Grid container spacing={3}>
         <Grid item xs={4}>
@@ -72,6 +97,6 @@ function Topic(props) {
   );
 }
 
-function Schduel() {
-  return <MatchFixture></MatchFixture>;
+function Schduel(props) {
+  return <MatchFixture name={props.name}></MatchFixture>;
 }

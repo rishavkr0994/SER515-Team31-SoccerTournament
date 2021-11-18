@@ -14,8 +14,10 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EmailIcon from "@mui/icons-material/Email";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import './MatchFixture.css'
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import "./MatchFixture.css";
+import  { useEffect } from "react";
+
 import {
   Grid,
   Button,
@@ -25,28 +27,7 @@ import {
   TextField,
 } from "@mui/material";
 import { InputAdornment } from "@material-ui/core";
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
-      },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
-      },
-    ],
-  };
-}
+import GetUser from "../utils/GetUser";
 
 function Row(props) {
   const { row } = props;
@@ -54,12 +35,12 @@ function Row(props) {
   const [available, setAvailable] = useState(true);
   const [booking, setBooking] = useState(false);
   const price = 20;
-  const [total,setTotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const handleBooking = () => {
     setBooking(true);
   };
 
-  const [order,setOrder] = useState({quantites:"0"})
+  const [order, setOrder] = useState({ quantites: "0" });
 
   const handleClose = () => {
     setBooking(false);
@@ -77,12 +58,11 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.time}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.team1}</TableCell>
+        <TableCell align="right">{row.team2}</TableCell>
+        <TableCell align="right">{row.field}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -134,9 +114,9 @@ function Row(props) {
                           label="Email"
                           type="email"
                           onChange={(e) => {
-                            const newOrder = {...order}
+                            const newOrder = { ...order };
                             newOrder.email = e.target.value;
-                            setOrder(newOrder)
+                            setOrder(newOrder);
                           }}
                           sx={{ maxWidth: "300px" }}
                         />
@@ -147,11 +127,11 @@ function Row(props) {
                           label="quantities"
                           type="number"
                           onChange={(e) => {
-                              const newTotal  = price * e.target.value;
-                              setTotal(newTotal);
-                              const newOrder = {...order}
-                              newOrder.quantites = e.target.value;
-                              setOrder(newOrder)
+                            const newTotal = price * e.target.value;
+                            setTotal(newTotal);
+                            const newOrder = { ...order };
+                            newOrder.quantites = e.target.value;
+                            setOrder(newOrder);
                           }}
                         />
                       </Grid>
@@ -196,19 +176,37 @@ function Row(props) {
   );
 }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
-export default function MatchFixture() {
+export default function MatchFixture(props) {
+  const [rows, setRows] = useState({ arr: [], isLoading: true, render: false });
+  const name = props.name;
+  const userInfo = GetUser();
+  useEffect(() => {
+    fetch(
+      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
+        name +
+        "/fixtures",
+      {
+        headers: {
+          "Content-Type":"application/json",
+          Authorization: userInfo.jwt,
+        },
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        const newRows = {...rows}
+        newRows.arr = res.data
+        newRows.isLoading = false
+        setRows(newRows)
+        console.log(res);
+      });
+  }, []);
   return (
     <div className="Main">
-      <TableContainer component={Paper} sx={{marginTop:"30px"}}>
+      <TableContainer component={Paper} sx={{ marginTop: "30px" }}>
         <Table aria-label="collapsible table">
-          <TableHead className="titleBg" sx={{fontWeight:"900"}}>
+          <TableHead className="titleBg" sx={{ fontWeight: "900" }}>
             <TableRow>
               <TableCell />
               <TableCell>Time</TableCell>
@@ -219,7 +217,7 @@ export default function MatchFixture() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.arr.map((row) => (
               <Row key={row.name} row={row} />
             ))}
           </TableBody>

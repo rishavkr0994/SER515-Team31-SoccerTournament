@@ -41,13 +41,15 @@ export default function Details(props) {
     return { key, value };
   }
 
+  console.log(tournament);
+
   const rows = [
     createData("Tournament name", tournament.items.name),
-    createData("Start day", tournament.startDate),
-    createData("End day", tournament.endDate),
-    createData("End of registration", tournament.registrationDeadline),
+    createData("Start day", tournament.items.startDate),
+    createData("End day", tournament.items.endDate),
+    createData("End of registration", tournament.items.registrationDeadline),
     createData("Fee", tournament.items.registrationFee),
-    createData("Feild", "this is a location"),
+    // createData("Feild", "this is a location"),
     createData("type", tournament.items.type),
   ];
   if (tournament.isLoading) return <BlockRotateLoading></BlockRotateLoading>;

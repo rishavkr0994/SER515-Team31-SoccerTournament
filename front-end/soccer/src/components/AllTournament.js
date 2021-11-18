@@ -93,9 +93,11 @@ export default function AllTournament() {
         color="secondary"
         sx={{ display: "flex", justifyContent: "center", marginTop: "25px" }}
       />
+      <div style={{display: "flex", justifyContent: "center", marginTop: "25px" }}>
       <Button variant="contained" href="/tournament/create">
         Add Tournament
       </Button>
+      </div>
     </div>
   );
 }

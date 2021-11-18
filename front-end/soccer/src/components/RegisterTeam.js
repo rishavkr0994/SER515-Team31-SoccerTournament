@@ -26,10 +26,10 @@ export default function RegisterTeam(props) {
     setShowError(true);
     setShowSuccess(false);
   };
-  const handleSuccess = () =>{
+  const handleSuccess = () => {
     setShowSuccess(true);
     setShowError(false);
-  }
+  };
   const handleRegister = () => {
     console.log(teamRegister);
     fetch(
@@ -46,10 +46,10 @@ export default function RegisterTeam(props) {
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {
-          handleError(res)
+          handleError(res);
           throw new Error(res);
         }
-        handleSuccess()
+        handleSuccess();
       })
       .catch(() => {});
   };
@@ -102,9 +102,7 @@ export default function RegisterTeam(props) {
             minWidth: "450px",
           }}
         >
-          <div className="registerTitle">
-            Register your team!
-          </div>
+          <div className="registerTitle">Register your team!</div>
           <Box
             component="form"
             sx={{
@@ -121,7 +119,7 @@ export default function RegisterTeam(props) {
                 onChange={(e) => {
                   setTeamRegister({
                     name: e.target.value,
-                    tournamentName:props.name,
+                    tournamentName: props.name,
                     type: teamRegister.type,
                   });
                 }}
@@ -162,7 +160,11 @@ export default function RegisterTeam(props) {
             </div>
             <Button
               variant="contained"
-              sx={{ marginTop: "50px", alignContent: "flex-end",marginRight:"20px" }}
+              sx={{
+                marginTop: "50px",
+                alignContent: "flex-end",
+                marginRight: "20px",
+              }}
               onClick={handleRegister}
             >
               Submit
