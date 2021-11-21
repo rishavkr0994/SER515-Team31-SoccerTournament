@@ -47,7 +47,7 @@ function Row(props) {
   };
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow>
         <TableCell>
           <IconButton
             aria-label="expand row"
