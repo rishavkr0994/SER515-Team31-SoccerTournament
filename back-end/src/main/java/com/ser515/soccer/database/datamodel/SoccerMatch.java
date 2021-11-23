@@ -13,7 +13,6 @@ import java.time.ZonedDateTime;
 @Entity @Table
 @Getter @Setter @NoArgsConstructor
 public class SoccerMatch {
-    @JsonIgnore
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
@@ -31,6 +30,9 @@ public class SoccerMatch {
     @JsonIgnore
     @ManyToOne @JoinColumn(name = "field_id")
     private SoccerField field;
+
+    private int aggregateTicketCount;
+    private int availableTicketCount;
 
     @JsonProperty("team1")
     public String getTeam1Name() {
