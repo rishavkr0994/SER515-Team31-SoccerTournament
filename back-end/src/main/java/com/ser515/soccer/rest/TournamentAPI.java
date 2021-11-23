@@ -151,6 +151,7 @@ public class TournamentAPI {
                     SoccerMatch soccerMatch = tournament.getMatchList().get(matchIdx++);
                     soccerMatch.setTime(tournament.getStartDate().plusDays(day - 1));
                     soccerMatch.setField(soccerFieldList.get(field - 1));
+                    soccerMatch.setAggregateTicketCount(soccerFieldList.get(field - 1).getSeatingCapacity());
                 }
             }
         }
