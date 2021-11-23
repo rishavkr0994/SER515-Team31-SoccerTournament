@@ -8,8 +8,9 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
-@SpringBootApplication
+@EnableAsync @SpringBootApplication
 @OpenAPIDefinition(info = @Info(
         title = "Soccer Tournament REST API",
         description = "Spring Boot REST API for Soccer Tournament Management Web Application",
