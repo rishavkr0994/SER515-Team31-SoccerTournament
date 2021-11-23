@@ -3,6 +3,7 @@ package com.ser515.soccer;
 import com.ser515.soccer.database.datamodel.SoccerMatch;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ public class TicketMailingService {
         this.javaMailSender = javaMailSender;
     }
 
+    @Async
     public void sendEmail(String recipientEmail, SoccerMatch soccerMatch) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(recipientEmail);

@@ -1,5 +1,6 @@
 package com.ser515.soccer.rest;
 
+import com.ser515.soccer.TicketMailingService;
 import com.ser515.soccer.database.datamodel.SoccerMatch;
 import com.ser515.soccer.database.repository.SoccerMatchRepository;
 import com.ser515.soccer.rest.datamodel.APIResponseBody;
@@ -19,9 +20,11 @@ import java.time.ZonedDateTime;
 @RequestMapping("/rest/match")
 public class SoccerMatchAPI {
     SoccerMatchRepository soccerMatchRepository;
+    TicketMailingService ticketMailingService;
 
-    public SoccerMatchAPI(SoccerMatchRepository soccerMatchRepository) {
+    public SoccerMatchAPI(SoccerMatchRepository soccerMatchRepository, TicketMailingService ticketMailingService) {
         this.soccerMatchRepository = soccerMatchRepository;
+        this.ticketMailingService = ticketMailingService;
     }
 
     @Operation(description = "Book ticket for a match with match id")
@@ -42,6 +45,8 @@ public class SoccerMatchAPI {
                     "The ticket booking window for the selected match has been closed"));
 
         soccerMatch.setAvailableTicketCount(soccerMatch.getAvailableTicketCount() - requestBody.ticketCount);
+        soccerMatchRepository.save(soccerMatch);
+        ticketMailingService.sendEmail(requestBody.emailAddress, soccerMatch);
         return ResponseEntity.ok().body(APIResponseBody.success(null));
     }
 }
