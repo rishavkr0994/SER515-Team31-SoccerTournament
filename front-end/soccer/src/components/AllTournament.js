@@ -8,6 +8,7 @@ import GetUser from "../utils/GetUser";
 import { useState } from "react";
 import axios from "axios";
 import BlockRotateLoading from "./BlockRotateLoading";
+import API_BASE from "../api/api";
 
 
 export default function AllTournament() {
@@ -42,7 +43,7 @@ export default function AllTournament() {
     console.log(query);
     axios({
       method: "GET",
-      url: "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament",
+      url: API_BASE+"rest/tournament",
       headers: {
         Authorization: userInfo.jwt,
       },

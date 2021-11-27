@@ -10,6 +10,7 @@ import "./FooterAndMain.css";
 import "./ATournament.css";
 import BlockRotateLoading from "./BlockRotateLoading";
 import GetUser from "../utils/GetUser";
+import API_BASE from "../api/api";
 
 export default function Details(props) {
   const userInfo = GetUser()
@@ -19,7 +20,7 @@ export default function Details(props) {
     getData();
     async function getData() {
       const res = await fetch(
-        "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
+        API_BASE+"rest/tournament/" +
           props.name,
         {
           headers: {

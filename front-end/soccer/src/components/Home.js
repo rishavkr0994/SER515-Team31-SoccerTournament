@@ -8,6 +8,7 @@ import GetUser from "../utils/GetUser";
 import { useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
+import API_BASE from "../api/api";
 
 export default function Home() {
   const userInfo = GetUser();
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     axios({
       method: "GET",
-      url: "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament",
+      url: API_BASE+"rest/tournament",
       headers: {
         Authorization: userInfo.jwt,
       },

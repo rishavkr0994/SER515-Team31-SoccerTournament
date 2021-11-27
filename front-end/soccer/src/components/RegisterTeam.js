@@ -13,6 +13,7 @@ import "./FooterAndMain.css";
 import "./ATournament.css";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
+import API_BASE from "../api/api";
 
 export default function RegisterTeam(props) {
   const state = useSelector((state) => state);
@@ -32,17 +33,14 @@ export default function RegisterTeam(props) {
   };
   const handleRegister = () => {
     console.log(teamRegister);
-    fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/team/registration",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: userInfo.jwt,
-        },
-        method: "POST",
-        body: JSON.stringify(teamRegister),
-      }
-    )
+    fetch(API_BASE + "rest/team/registration", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.jwt,
+      },
+      method: "POST",
+      body: JSON.stringify(teamRegister),
+    })
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {

@@ -9,6 +9,7 @@ import Details from "./Details";
 import RegisterTeam from "./RegisterTeam";
 import MatchFixture from "./MatchFixture";
 import GetUser from "../utils/GetUser";
+import API_BASE from "../api/api";
 
 export default function ATournament(props) {
   let { name } = useParams();
@@ -16,18 +17,14 @@ export default function ATournament(props) {
   const userInfo = GetUser();
 
   const handleGenerate = () => {
-    fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
-        name +
-        "/fixtures",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: userInfo.jwt,
-        },
-        method: "POST",
-      }
-    ).then((res)=>res.json())
+    fetch(API_BASE + "/rest/tournament/" + name + "/fixtures", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.jwt,
+      },
+      method: "POST",
+    })
+      .then((res) => res.json())
       .then((res) => {
         console.log(res);
       })

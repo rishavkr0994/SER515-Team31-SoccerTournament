@@ -16,7 +16,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EmailIcon from "@mui/icons-material/Email";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import "./MatchFixture.css";
-import  { useEffect } from "react";
+import { useEffect } from "react";
 
 import {
   Grid,
@@ -28,6 +28,7 @@ import {
 } from "@mui/material";
 import { InputAdornment } from "@material-ui/core";
 import GetUser from "../utils/GetUser";
+import API_BASE from "../api/api";
 
 function Row(props) {
   const { row } = props;
@@ -181,26 +182,23 @@ export default function MatchFixture(props) {
   const name = props.name;
   const userInfo = GetUser();
   useEffect(() => {
-    fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/" +
-        name +
-        "/fixtures",
-      {
-        headers: {
-          "Content-Type":"application/json",
-          Authorization: userInfo.jwt,
-        },
-        method: "GET",
-      }
-    )
+    fetch(API_BASE + name + "/fixtures", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.jwt
+      },
+      method: "GET",
+    })
       .then((res) => res.json())
       .then((res) => {
-        const newRows = {...rows}
-        newRows.arr = res.data
-        newRows.isLoading = false
-        setRows(newRows)
+        const newRows = { ...rows };
+        newRows.arr = res.data;
+        newRows.isLoading = false;
+        setRows(newRows);
         console.log(res);
-      });
+      }).catch((error)=>{
+        console.log(error);
+      })
   }, []);
   return (
     <div className="Main">
