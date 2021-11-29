@@ -16,7 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-@RestController @RequestMapping("/rest/user")
+@RestController @RequestMapping(value = "/rest/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserAPI {
     final AuthenticationManager authenticationManager;
     final JwtUtils jwtUtils;
@@ -33,8 +33,7 @@ public class UserAPI {
     }
 
     @Operation(description = "Register a user with user information")
-    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/signup", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponseBody> signUp(@RequestBody SignUpRequestBody requestBody) {
         if (userRepository.existsByEmailAddress(requestBody.email))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
@@ -52,8 +51,7 @@ public class UserAPI {
     }
 
     @Operation(description = "Authenticate a user based on username and password and return a JWT")
-    @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/signin", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponseBody> signin(@RequestBody SignInRequestBody requestBody) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(requestBody.username, requestBody.password));

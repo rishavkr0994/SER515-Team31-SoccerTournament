@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @SecurityRequirement(name = "JWT Based Authentication")
-@RestController @RequestMapping("/rest/field")
+@RestController @RequestMapping(value = "/rest/field", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SoccerFieldAPI {
     SoccerFieldRepository soccerFieldRepository;
 
@@ -24,7 +24,7 @@ public class SoccerFieldAPI {
 
     // TODO: Convert Response Body To Paged Response Body For Handling Large Tournament Lists With The General Get API
     @Operation(description = "Get list of all the soccer fields or a soccer field by name")
-    @GetMapping(value = {"", "/{name}"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = {"", "/{name}"})
     public ResponseEntity<Object> get(@PathVariable(required = false) String name) {
         if (name == null) {
             List<SoccerField> soccerFieldList = soccerFieldRepository.findAll();
@@ -39,8 +39,7 @@ public class SoccerFieldAPI {
     }
 
     @Operation(description = "Add a soccer field information to database")
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> add(@RequestBody AddSoccerFieldRequestBody requestBody) {
         if (soccerFieldRepository.existsByName(requestBody.name))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(

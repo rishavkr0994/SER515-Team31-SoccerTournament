@@ -40,7 +40,7 @@ export default function Details(props) {
 
   function createData(key, value) {
     if(key === "Registration Fee" || key === "Ticket Price"){
-      value = value + " $";
+      value = "$" + value;
       return {key, value}
     }
     return { key, value };

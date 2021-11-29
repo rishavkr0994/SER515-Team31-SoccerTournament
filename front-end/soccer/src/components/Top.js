@@ -9,21 +9,12 @@ import Share from './Share'
 export default function Top() {
   return (
     <div className="TopCss">
-      <Grid container alignItems="center">
-        <Grid item xs={2} sx={{ alignItems: "left" }}>
-          <div>
-            <img className="imgCss" src={require("../visit.png")} alt=""></img>
-          </div>
-        </Grid>
-        <Grid item xs={3} sx={{ textAlign: "left" }}>
-          <div>
-            <h1>ASU Soccer</h1>
-          </div>
-        </Grid>
-        <Grid item xs={4}>
-          {" "}
-        </Grid>
-        <Grid item xs={3} sx={{ alignItems: "right" }}>
+      <Grid container alignItems="center" justifyContent="spaceBetween">
+        <Grid item container xs={10} alignItems="center">
+          <img className="imgCss" src={require("../visit.png")} alt=""/> 
+          <h1 className="headingCss">ASU Soccer</h1>  
+        </Grid> 
+        <Grid item xs={2} sx={{ alignItems: "right" }}>
           <TopLeft></TopLeft>
         </Grid>
       </Grid>

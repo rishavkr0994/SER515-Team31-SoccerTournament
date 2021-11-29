@@ -10,6 +10,7 @@ import Top from "./components/Top";
 import ATournament from "./components/ATournament";
 import AllTournament from "./components/AllTournament";
 import CreateTournament from "./components/CreateTournament";
+import NewMap from "./components/NewMap";
 
 function App() {
   useEffect(() => {
@@ -35,7 +36,7 @@ function App() {
             <CreateTournament></CreateTournament>
           </Route>
           <Route path="/map">
-            <Map></Map>
+            <NewMap></NewMap>
           </Route>
           <Route path="/">
             <Home></Home>

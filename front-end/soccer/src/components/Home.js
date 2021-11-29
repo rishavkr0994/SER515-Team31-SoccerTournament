@@ -40,9 +40,9 @@ export default function Home() {
     <div>
       <div className="Main">
         <h1 className="Coming"> Upcoming Tournaments</h1>
-        <Grid container spacing={12}>
+        <Grid container spacing={12} justifyContent="space-evenly">
           {rows.arr.map((row) => (
-            <Grid item xs={4}>
+            <Grid item xs={2}>
               <TournamentCard key={row.name} tournament={row} />
             </Grid>
           ))}
@@ -65,15 +65,15 @@ export default function Home() {
       </div>
       <div
         style={{
-          height: "300px",
+          height: "260px",
           backgroundColor: "black",
           marginTop: "-45vh",
           color: "white",
         }}
       >
         <Grid container spacing={3}>
-          <Grid item xs={4} display="flex" justifyContent="flex-end">
-            <div style={{ fontSize: "40px", marginLeft: "30px" }}>
+          <Grid item xs={4} display="flex" justifyContent="center">
+            <div style={{ fontSize: "40px" }}>
               COVID 19 GUIDELINES
             </div>
           </Grid>
@@ -94,7 +94,7 @@ export default function Home() {
               style={{
                 alignSelf:"center",
                 border: "1px solid red",
-                width: "200px",
+                width: "300px",
                 // marginLeft:"-200px"
               }}
             ></div>
@@ -114,8 +114,8 @@ export default function Home() {
               vaccinated.
             </div>
           </Grid>
-          <Grid item xs={4} display="flex" justifyContent="center">
-            <div style={{ fontSize: "40px", marginLeft: "30px" }}>
+          <Grid item xs={4} display="flex"  alignContent="flex-start" justifyContent="center">
+            <div style={{ fontSize: "40px" }}>
               AUGUST 5TH
             </div>
           </Grid>

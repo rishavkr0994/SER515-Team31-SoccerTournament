@@ -33,7 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @SecurityRequirement(name = "JWT Based Authentication")
-@RestController @RequestMapping("/rest/tournament")
+@RestController @RequestMapping(value = "/rest/tournament", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TournamentAPI {
     final TournamentRepository tournamentRepository;
     final SoccerMatchRepository soccerMatchRepository;
@@ -50,7 +50,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Get paginated list of all the tournaments (with optional filters)")
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "")
     public ResponseEntity<Object> get(@RequestParam(required = false, value = "page", defaultValue = "1") Integer page,
                                       @RequestParam(required = false, value = "size", defaultValue = "10") Integer size,
                                       @RequestParam(required = false, value = "filterUpcoming", defaultValue = "False")
@@ -69,7 +69,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Get tournament information by name")
-    @GetMapping(value = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{name}")
     public ResponseEntity<Object> getByName(@PathVariable String name) {
         Tournament tournament = tournamentRepository.findByName(name).orElse(null);
         if (tournament == null)
@@ -79,8 +79,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Register a tournament with tournament information")
-    @PostMapping(value = "/registration", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/registration", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> registration(@RequestBody TournamentRegistrationBody requestBody) {
         if (tournamentRepository.existsByName(requestBody.name))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
@@ -97,8 +96,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Generates the match fixtures for a tournament")
-    @PostMapping(value = "/{name}/fixtures", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{name}/fixtures")
     public ResponseEntity<Object> generateFixtures(@PathVariable String name) {
         Tournament tournament = tournamentRepository.findByName(name).orElse(null);
         if (tournament == null)
@@ -152,6 +150,7 @@ public class TournamentAPI {
                     soccerMatch.setTime(tournament.getStartDate().plusDays(day - 1));
                     soccerMatch.setField(soccerFieldList.get(field - 1));
                     soccerMatch.setAggregateTicketCount(soccerFieldList.get(field - 1).getSeatingCapacity());
+                    soccerMatch.setAvailableTicketCount(soccerFieldList.get(field - 1).getSeatingCapacity());
                 }
             }
         }
@@ -162,8 +161,7 @@ public class TournamentAPI {
     }
 
     @Operation(description = "Gets the match fixtures for a tournament")
-    @GetMapping(value = "/{name}/fixtures", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{name}/fixtures")
     public ResponseEntity<Object> getFixtures(@PathVariable String name) {
         Tournament tournament = tournamentRepository.findByName(name).orElse(null);
         if (tournament == null)
