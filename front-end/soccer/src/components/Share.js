@@ -8,7 +8,7 @@ export default function Share() {
     <div style={{marginTop:"10px",marginBottom:"-50px"}}>
         <Grid container>
           <Grid item xs={4} >
-          <AwesomeButtonSocial type="facebook"></AwesomeButtonSocial>
+          <AwesomeButtonSocial href="https://www.facebook.com/profile.php?id=100071460048636" type="facebook"></AwesomeButtonSocial>
 
           </Grid>
           <Grid item xs={4}>
