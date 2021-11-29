@@ -4,6 +4,8 @@
 # Soccer_Tournament_Website
 ## SER 515 Project [Group 31]
 
+![screencapture-ser515-team31-soccertournament-web-app-s3-website-us-east-2-amazonaws-2021-11-29-02_57_43](https://user-images.githubusercontent.com/89811541/143846770-0fa14809-622f-4f2a-9e2c-dacd91efbdf3.png)
+
 #### Project Management Resources:
 	Taiga: https://tree.taiga.io/project/rishavkr0994-soccer-tournament-website/backlog
 	Google Drive: https://drive.google.com/drive/u/3/folders/0AHNourJPboIPUk9PVA
