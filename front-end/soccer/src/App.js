@@ -3,11 +3,14 @@ import NavMenu from "./components/NavMenu";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
-import Map from './components/Map'
+import Map from "./components/Map";
 import Footer from "./components/Footer";
 import Tournaments from "./components/Tournaments";
 import Top from "./components/Top";
 import ATournament from "./components/ATournament";
+import AllTournament from "./components/AllTournament";
+import CreateTournament from "./components/CreateTournament";
+import NewMap from "./components/NewMap";
 
 function App() {
   useEffect(() => {
@@ -23,21 +26,24 @@ function App() {
           <Route path="/about">
             <About></About>
           </Route>
-          <Route path="/tournaments">
-            <Tournaments></Tournaments>
+          <Route path="/tournament/getAll">
+            <AllTournament></AllTournament>
           </Route>
-          <Route path="/tournament/:name">
+          <Route path="/tournament/get/:name">
             <ATournament></ATournament>
-            </Route>
+          </Route>
+          <Route path="/tournament/create">
+            <CreateTournament></CreateTournament>
+          </Route>
           <Route path="/map">
-            <Map></Map>
+            <NewMap></NewMap>
           </Route>
           <Route path="/">
             <Home></Home>
           </Route>
         </Switch>
       </Router>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

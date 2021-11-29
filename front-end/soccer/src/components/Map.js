@@ -1,68 +1,97 @@
-import React, { Component,useState } from 'react';
-import GoogleMapReact from 'google-map-react';
-import Marker from './Marker';
-import { GoogleMap, InfoWindow } from "@react-google-maps/api";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import React, { useState } from "react";
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import { Stack, Grid } from '@mui/material';
+import '../App.css'
 
 const markers = [
   {
     id: 1,
-    name: "Chicago, Illinois",
-    position: { lat: 41.881832, lng: -87.623177 }
+    name: "A-001, Peco Park Field",
+    position: { lat: 33.26888, lng: -111.52462 },
   },
   {
     id: 2,
-    name: "Denver, Colorado",
-    position: { lat: 39.739235, lng: -104.99025 }
+    name: "A-002, Rose Mofford Sports Complex",
+    position: { lat: 33.403709, lng: -111.972229 },
   },
   {
     id: 3,
-    name: "Los Angeles, California",
-    position: { lat: 34.052235, lng: -118.243683 }
+    name: "B-001, Phoenix Sports Centre",
+    position: { lat: 33.45609, lng: -111.98953 },
   },
   {
     id: 4,
-    name: "New York, New York",
-    position: { lat: 40.712776, lng: -74.005974 }
-  }
+    name: "B-002, Desert West Sports Complex",
+    position: { lat: 33.3717, lng: -112.21181 },
+  },
+  {
+    id: 5,
+    name: "B-002, ewrwerwer",
+    position: { lat: 34.3717, lng: -112.223481 },
+  },
 ];
-class Map extends Component {
-  static defaultProps = {
-    center: {
-      lat: 34.048928,
-      lng: -111.093731
-    },
-    zoom: 11
+
+function Map() {
+  const [activeMarker, setActiveMarker] = useState(null);
+
+  const handleActiveMarker = (marker) => {
+    if (marker === activeMarker) {
+      return;
+    }
+    setActiveMarker(marker);
   };
 
-  render() {
-    return (
-      // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBCMB_ZQOlQThgFrxXib-MuzQbZ1a71ZvU"}}
-          defaultCenter={{lat: 34.048928, lng: -111.093731}}
-          defaultZoom={10}
-        >
-        {markers.map(({id,name,position})=>(
+  const handleOnLoad = (map) => {
+    const bounds = new window.google.maps.LatLngBounds();
+    markers.forEach(({ position }) => bounds.extend(position));
+    map.fitBounds(bounds);
+  };
 
-        <Marker key= {1}
-          position={{lat: 34.048928, lng: -111.093731}} 
+  return (
+    <div>
+      <Grid container>
+        <Grid item xs={1}>
+        <Stack spacing={2} textAlign="center" className="MapBar">
+        <a onClick={e=>{
+          handleActiveMarker(1)
+        }}>FIELD-A-001</a>
+        <a onClick={e=>{
+          handleActiveMarker(2)
+        }}>FIELD-A-002</a>
+        <a onClick={e=>{
+          handleActiveMarker(3)
+        }}>FIELD-B-001</a>
+        <a onClick={e=>{
+          handleActiveMarker(4)
+        }}>FIELD-B-002</a>
+      </Stack>
+        </Grid>
+        <Grid item xs={11}>
+        <GoogleMap
+        onLoad={handleOnLoad}
+        onClick={() => setActiveMarker(null)}
+        mapContainerStyle={{ width: "100%", height: "100vh" }}
       >
-      <Marker key= {2}
-          position={{lat: 35.048928, lng: -112.093731}} 
-      /><Marker key= {3}
-          position={{lat: 36.048928, lng: -113.093731}} 
-      /><Marker key= {4}
-          position={{lat: 37.048928, lng: -114.093731}} 
-      />
-        </Marker>
-          
-         ))}
-        </GoogleMapReact>
-      </div>
-    );
-  }
+        {markers.map(({ id, name, position }) => (
+          <Marker
+            key={id}
+            position={position}
+            onClick={() => handleActiveMarker(id)}
+          >
+            {activeMarker === id ? (
+              <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                <div>{name}</div>
+              </InfoWindow>
+            ) : null}
+          </Marker>
+        ))}
+      </GoogleMap>
+        </Grid>
+      </Grid>
+
+
+    </div>
+  );
 }
+
 export default Map;
