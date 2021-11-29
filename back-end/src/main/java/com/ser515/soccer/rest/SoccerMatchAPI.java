@@ -17,7 +17,7 @@ import java.time.ZonedDateTime;
 
 @SecurityRequirement(name = "JWT Based Authentication")
 @RestController
-@RequestMapping("/rest/match")
+@RequestMapping(value = "/rest/match", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SoccerMatchAPI {
     SoccerMatchRepository soccerMatchRepository;
     TicketMailingService ticketMailingService;
@@ -28,21 +28,19 @@ public class SoccerMatchAPI {
     }
 
     @Operation(description = "Book ticket for a match with match id")
-    @PostMapping(value = "/{id}/bookTicket", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{id}/bookTicket", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<APIResponseBody> bookTicket(@PathVariable Long id, @Valid @RequestBody BookTicketRequestBody
             requestBody) {
         SoccerMatch soccerMatch = soccerMatchRepository.findById(id).orElse(null);
         if (soccerMatch == null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
-                    "The match id is not valid"));
+            return ResponseEntity.ok().body(APIResponseBody.failure("The match id is not valid"));
 
         if (soccerMatch.getAvailableTicketCount() < requestBody.ticketCount)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
-                    "The no. of tickets are not available / have been sold out for the selected match"));
+            return ResponseEntity.ok().body(APIResponseBody.failure("The no. of tickets are not available / have been" +
+                    " sold out for the selected match"));
         else if (soccerMatch.getTime().compareTo(ZonedDateTime.now()) < 0)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(APIResponseBody.failure(
-                    "The ticket booking window for the selected match has been closed"));
+            return ResponseEntity.ok().body(APIResponseBody.failure("The ticket booking window for the selected match" +
+                    " has been closed"));
 
         soccerMatch.setAvailableTicketCount(soccerMatch.getAvailableTicketCount() - requestBody.ticketCount);
         soccerMatchRepository.save(soccerMatch);
