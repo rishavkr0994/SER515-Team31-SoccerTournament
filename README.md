@@ -1,7 +1,4 @@
-
-
-
-# Soccer_Tournament_Website
+# Soccer_Tournament_Website [ASU Soccer]
 ## SER 515 Project [Group 31]
 
 ![screencapture-ser515-team31-soccertournament-web-app-s3-website-us-east-2-amazonaws-2021-11-29-02_57_43](https://user-images.githubusercontent.com/89811541/143846770-0fa14809-622f-4f2a-9e2c-dacd91efbdf3.png)
