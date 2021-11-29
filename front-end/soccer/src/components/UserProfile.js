@@ -9,7 +9,7 @@ export default function UserProfile() {
   return (
     <div>
       <div className="userProfile">
-        <div className="inLine">Hi{userInfo.firstName}</div>
+        <div className="inLine">Hi  {userInfo.firstName}</div>
         <div className="inLine">
         <Avatar sx={{ bgcolor: deepPurple[500] }}>R</Avatar>
         </div>

@@ -17,7 +17,7 @@ export default function ATournament(props) {
   const userInfo = GetUser();
 
   const handleGenerate = () => {
-    fetch(API_BASE + "/rest/tournament/" + name + "/fixtures", {
+    fetch(API_BASE + "rest/tournament/" + name + "/fixtures", {
       headers: {
         "Content-Type": "application/json",
         Authorization: userInfo.jwt,
@@ -55,7 +55,7 @@ export default function ATournament(props) {
           </Button>
         </Grid>
         <Grid item xs={2}>
-          <Button variant="contained" onClick={(e) => handleGenerate()}>
+          <Button variant="contained" disabled={userInfo.isLoggedIn === false} onClick={(e) => handleGenerate()}>
             Generate Match Fixture
           </Button>
         </Grid>
