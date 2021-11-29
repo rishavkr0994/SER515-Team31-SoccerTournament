@@ -43,45 +43,45 @@ function Item(props) {
   console.log(props);
   return (
     <div style={{ height: "290px", justifyContent: "center",marginTop:"20px"}}>
-        <div style={{textAlign:"center",fontSize:"30px",fontWeight:"600"}}>SPONSORS AND PARTNERS</div>
-      <Grid container spacing={4} sx={{ maxHeight: "400px"}}>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src1}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
+        <div style={{textAlign:"center",fontSize:"30px",fontWeight:"600"}}>Sponsors and Partners</div>
+        <Grid container spacing={4} sx={{ height: '100%'}}>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px" }}>
+            <img
+              src={props.item.src1}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px"}}>
+            <img
+              src={props.item.src2}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px"}}>
+            <img
+              src={props.item.src3}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px"}}>
+            <img
+              src={props.item.src4}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px"}}>
+            <img
+              src={props.item.src5}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
+          <Grid item xs={2} sx={{ height: '100%', marginTop: "10px", marginBottom: "10px"}}>
+            <img
+              src={props.item.src6}
+              style={{ width: "100%", height: "100%", objectFit: "contain"}}
+            ></img>
+          </Grid>
         </Grid>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src2}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
-        </Grid>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src3}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
-        </Grid>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src4}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
-        </Grid>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src5}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
-        </Grid>
-        <Grid item xs={2}>
-          <img
-            src={props.item.src6}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          ></img>
-        </Grid>
-      </Grid>
     </div>
   );
 }
