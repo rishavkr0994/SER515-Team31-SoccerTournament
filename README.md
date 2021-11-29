@@ -18,13 +18,13 @@ The deployment has been done using AWS. The front-end has been hosted within an 
 - Node >= 14.0.0 and npm >= 5.6 
 #### Steps To Run The Front-End (React Application)
 	1. Git clone the project to your workplace.
-	2. Open the project in the terminal and using command "cd front-end/soccer" to the soccer directory.
-	3. Run "npm install".
-	4. Run "npm start".
+	2. Open the project in the terminal and using command 'cd front-end/soccer' to the soccer directory.
+	3. Run 'npm install'.
+	4. Run 'npm start'.
 
 #### Back-End Environment: 
 - Java >= 8 and MySQL 8.0
 #### Steps To Run The Back-End (Spring Boot Application)
 	1. Git clone the project to your workplace.
-	2. Open the project in the IDE and find the "SoccerApplication" Class under directory "src/main/java/com.ser515.soccer".
-	3. Right click the class and choose "Run 'SoccerApplication'" option.
+	2. Open the project in the IDE and find the 'SoccerApplication' class under directory 'src/main/java/com.ser515.soccer'.
+	3. Right click the class and choose "Run 'SoccerApplication' option.
