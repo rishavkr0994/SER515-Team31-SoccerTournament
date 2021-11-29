@@ -20,11 +20,11 @@ class  NavMenu extends React.Component{
               <Grid item xs={2}>
                 <Item label="Map" to="/map"></Item>
               </Grid>
+              <Grid item xs={2}>
+                <Item label="Rules" to="/rules"></Item>
+              </Grid>
               <Grid item xs={2}>    
                 <Item label="About Us" to="/about"></Item>
-              </Grid>
-              <Grid item xs={2}>
-                <Item label="Rule" to="/rules"></Item>
               </Grid>
               <Grid item xs={1}></Grid>
             </Grid>
