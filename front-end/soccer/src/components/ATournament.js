@@ -39,24 +39,24 @@ export default function ATournament(props) {
         <h1>{name}</h1>
       </div>
       <Grid container alignItems="center" justifyContent="center">
-        <Grid item xs={2}>
+        <Grid item xs={1.5}>
           <Button variant="contained" href={`${url}/details`}>
             Details
           </Button>
         </Grid>
-        <Grid item xs={2}>
-          <Button variant="contained" href={`${url}/schduel`}>
-            Schduel
+        <Grid item xs={1.5}>
+          <Button variant="contained" href={`${url}/schedule`}>
+            Schedule
           </Button>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={1.5}>
           <Button variant="contained" href={`${url}/register`}>
             Register
           </Button>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={1.5}>
           <Button variant="contained" disabled={userInfo.isLoggedIn === false} onClick={(e) => handleGenerate()}>
-            Generate Match Fixture
+            Generate Match Fixtures
           </Button>
         </Grid>
       </Grid>
@@ -86,7 +86,7 @@ function Topic(props) {
   return (
     <div>
       {topicId === "details" && <Details name={props.name}></Details>}
-      {topicId === "schduel" && <Schduel name={props.name}></Schduel>}
+      {topicId === "schedule" && <Schedule name={props.name}></Schedule>}
       {topicId === "register" && (
         <RegisterTeam name={props.name}></RegisterTeam>
       )}
@@ -94,6 +94,6 @@ function Topic(props) {
   );
 }
 
-function Schduel(props) {
+function Schedule(props) {
   return <MatchFixture name={props.name}></MatchFixture>;
 }

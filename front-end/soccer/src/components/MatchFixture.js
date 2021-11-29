@@ -86,8 +86,8 @@ export default function MatchFixture(props) {
             <TableRow>
               <TableCell />
               <TableCell>Time</TableCell>
-              <TableCell align="center">Team1</TableCell>
-              <TableCell align="center">Team2</TableCell>
+              <TableCell align="center">Team 1</TableCell>
+              <TableCell align="center">Team 2</TableCell>
               <TableCell align="center">Field</TableCell>
               {/* <TableCell align="right">whatever</TableCell> */}
             </TableRow>
@@ -185,10 +185,10 @@ function Row(props) {
               </Typography>
               <Grid container justifyContent="center" alignContent="center">
                 <Grid item xs={3}>
-                  Price:{" "+props.price+" $"}
+                  Price:{" $"+props.price}
                 </Grid>
                 <Grid item xs={3}>
-                  Seats Available:{row.availableTicketCount}/{row.aggregateTicketCount}
+                  Seats Available: {row.availableTicketCount}/{row.aggregateTicketCount}
                 </Grid>
                 <Grid item xs={3}>
                   <Button

@@ -100,7 +100,7 @@ export default function RegisterTeam(props) {
             minWidth: "450px",
           }}
         >
-          <div className="registerTitle">Register your team!</div>
+          <div className="registerTitle">Register your Team!</div>
           <Box
             component="form"
             sx={{
