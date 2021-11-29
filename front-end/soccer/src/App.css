@@ -1,0 +1,12 @@
+.MapBar{
+    margin-top: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    color: rgb(0, 104, 145);
+    font-weight: 700;
+}
+
+a:hover{
+    cursor: pointer;
+    font-size: 25px;
+}
