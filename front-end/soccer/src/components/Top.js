@@ -33,6 +33,7 @@ export default function Top() {
 
 function TopLeft() {
   const userInfo = GetUser();
+  console.log(userInfo);
   if (userInfo.isLoggedIn) {
     return (
       <div>
@@ -45,7 +46,6 @@ function TopLeft() {
         </Grid>
       </Grid>
       </div>
-
     );
   } else {
     return(

@@ -40,6 +40,7 @@ export default function AllTournament() {
   function fetchData(p) {
     console.log("check Query");
     console.log(query);
+    console.log(userInfo);
     axios({
       method: "GET",
       url: API_BASE + "rest/tournament",

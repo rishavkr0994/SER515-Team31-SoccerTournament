@@ -17,6 +17,11 @@ export default function SignInSignUp() {
   const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = React.useState(false);
   const [incorrect, setIncorrect] = React.useState(false);
+  const [userLogin, setUserLogin] = React.useState({
+    username: "",
+    password: "",
+  });
+
   const handleClickOpenLogin = () => {
     setIncorrect(false);
     setOpenLogin(true);
@@ -27,6 +32,7 @@ export default function SignInSignUp() {
   };
 
   const handleLogin = () => {
+    console.log(userLogin);
     fetch(API_BASE + "rest/user/signin", {
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +49,7 @@ export default function SignInSignUp() {
             setUser({
               role: res.data.role,
               email: res.data.eMailAddress,
-              jwt:"Bearer "+ res.data.jwt,
+              jwt: "Bearer " + res.data.jwt,
               firstName: res.data.firstName,
               lastName: res.data.lastName,
             })
@@ -54,11 +60,6 @@ export default function SignInSignUp() {
       .catch(() => {
         setIncorrect(true);
       });
-  };
-
-  const userLogin = {
-    username: "",
-    password: "",
   };
 
   return (
@@ -95,7 +96,9 @@ export default function SignInSignUp() {
               label="Email Address"
               type="email"
               onChange={(e) => {
-                userLogin.username = e.target.value;
+                const newLog = {...userLogin};
+                newLog.username = e.target.value;
+                setUserLogin(newLog);
               }}
             />
           </div>
@@ -106,7 +109,9 @@ export default function SignInSignUp() {
             label="Password"
             type="password"
             onChange={(e) => {
-              userLogin.password = e.target.value;
+                const newLog = {...userLogin};
+                newLog.password = e.target.value;
+                setUserLogin(newLog);
             }}
           />
         </DialogContent>
