@@ -45,7 +45,7 @@ function TopLeft() {
           <Share></Share>
         </Grid>
         <Grid item xs={12}>
-        <SignInSignUp></SignInSignUp>;
+        <SignInSignUp></SignInSignUp>
         </Grid>
       </Grid>
     );

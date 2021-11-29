@@ -6,9 +6,11 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import './TournamentCard.css'
+import {useHistory} from 'react-router-dom'
 
 export default function TournamentCard(props) {
   const end = props.tournament.endDate;
+  const history = useHistory()
   const d = new Date();
   const day = d.getUTCDate();
   const month = Number(d.getMonth())+1;
@@ -23,8 +25,13 @@ export default function TournamentCard(props) {
       onGoing = day<=end.substring(3,5)
     }
   }
+
+  const handleLearnMore = (path) => {
+    history.push(path)
+  }
+
   return (
-    <Card sx={{width:"100%",height:"100%",maxWidth:"300px"}}>
+    <Card sx={{width:"100%",height:"100%",maxWidth:"300px",maxHeight:"400px",minWidth:"250px"}}>
         { onGoing &&
             <img className="Fire" src="https://i.ibb.co/5XDzD1p/7cdaed0ede86.gif" alt="" height="60" />
         }
@@ -53,7 +60,7 @@ export default function TournamentCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button  size="small" href={"/tournament/get/" + props.tournament.name}>Learn More</Button>
+        <Button  size="small" onClick={e=>{handleLearnMore("/tournament/get/" + props.tournament.name)}}>Learn More</Button>
       </CardActions>
     </Card>
   );

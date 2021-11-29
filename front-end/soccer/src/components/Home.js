@@ -10,9 +10,11 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import API_BASE from "../api/api";
 import { BannerCarousel } from "../components/Banner/Banner";
+import {useHistory} from 'react-router-dom'
 
 export default function Home() {
   const userInfo = GetUser();
+  const history = useHistory()
   const [rows, setRows] = useState({ arr: [], isLoading: true, render: false });
   useEffect(() => {
     axios({
@@ -27,7 +29,6 @@ export default function Home() {
         filterUpcoming: true,
       },
     }).then((res) => {
-      console.log("from backend");
       const arr = Object.values(res.data.data);
       const newT = { ...rows };
       newT.arr = arr;
@@ -36,11 +37,16 @@ export default function Home() {
       setRows(newT);
     });
   }, []);
+
+  const handleAddTournament = () => {
+    history.push("/tournament/create")
+  }
+
   return (
     <div>
       <div className="Main">
         <h1 className="Coming"> Upcoming Tournaments</h1>
-        <Grid container spacing={12} justifyContent="space-evenly">
+        <Grid container spacing={12} justifyContent="space-evenly" sx={{maxHeight:"400px"}}>
           {rows.arr.map((row) => (
             <Grid item xs={2}>
               <TournamentCard key={row.name} tournament={row} />
@@ -56,7 +62,8 @@ export default function Home() {
         >
           <Button
             variant="contained"
-            href="/tournament/create"
+            // href="/tournament/create"
+            onClick={handleAddTournament}
             disabled={userInfo.isLoggedIn === false}
           >
             Add Tournament

@@ -10,12 +10,13 @@ import RegisterTeam from "./RegisterTeam";
 import MatchFixture from "./MatchFixture";
 import GetUser from "../utils/GetUser";
 import API_BASE from "../api/api";
+import { useHistory } from "react-router-dom";
 
 export default function ATournament(props) {
   let { name } = useParams();
   let { path, url } = useRouteMatch();
   const userInfo = GetUser();
-
+  const history = useHistory();
   const handleGenerate = () => {
     fetch(API_BASE + "rest/tournament/" + name + "/fixtures", {
       headers: {
@@ -33,6 +34,10 @@ export default function ATournament(props) {
       });
   };
 
+  const handleClick = (path) => {
+    history.push(path);
+  };
+
   return (
     <div className="Main">
       <div className="centerTitle">
@@ -40,22 +45,41 @@ export default function ATournament(props) {
       </div>
       <Grid container alignItems="center" justifyContent="center">
         <Grid item xs={1.5}>
-          <Button variant="contained" href={`${url}/details`}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              handleClick(`${url}/details`);
+            }}
+          >
             Details
           </Button>
         </Grid>
         <Grid item xs={1.5}>
-          <Button variant="contained" href={`${url}/schedule`}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              handleClick(`${url}/schedule`);
+            }}
+          >
             Schedule
           </Button>
         </Grid>
         <Grid item xs={1.5}>
-          <Button variant="contained" href={`${url}/register`}>
+          <Button
+            variant="contained"
+            onClick={(e) => {
+              handleClick(`${url}/register`);
+            }}
+          >
             Register
           </Button>
         </Grid>
         <Grid item xs={1.5}>
-          <Button variant="contained" disabled={userInfo.isLoggedIn === false} onClick={(e) => handleGenerate()}>
+          <Button
+            variant="contained"
+            disabled={userInfo.isLoggedIn === false}
+            onClick={(e) => handleGenerate()}
+          >
             Generate Match Fixtures
           </Button>
         </Grid>
