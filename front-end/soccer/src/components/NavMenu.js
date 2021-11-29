@@ -3,14 +3,12 @@ import React from "react";
 import { Link ,useRouteMatch} from "react-router-dom";
 import "./NavMenu.css";
 
-
-
 class  NavMenu extends React.Component{
     render(){
         return (
             <div className="MenuStyle">
             <Grid container className="Nav" alignItems="center" justifyContent="center">
-              <Grid item xs={2}></Grid>
+              <Grid item xs={1}></Grid>
               <Grid item xs={2}>
                 <Item label="Home" to="/" 
                     activeOnlyWhenExact={true}
@@ -25,7 +23,10 @@ class  NavMenu extends React.Component{
               <Grid item xs={2}>    
                 <Item label="About Us" to="/about"></Item>
               </Grid>
-              <Grid item xs={2}></Grid>
+              <Grid item xs={2}>
+                <Item label="Rule" to="/rules"></Item>
+              </Grid>
+              <Grid item xs={1}></Grid>
             </Grid>
             </div>
           );

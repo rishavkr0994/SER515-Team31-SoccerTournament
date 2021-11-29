@@ -32,15 +32,19 @@ function App() {
           <Route path="/tournament/get/:name">
             <ATournament></ATournament>
           </Route>
-          <Route path="/tournament/create">
+          <Route exact path="/tournament/create">
             <CreateTournament></CreateTournament>
           </Route>
           <Route path="/map">
             <NewMap></NewMap>
           </Route>
+          <Route path="/rules">
+            <Tournaments></Tournaments>
+          </Route>
           <Route path="/">
             <Home></Home>
           </Route>
+
         </Switch>
       </Router>
       <Footer />

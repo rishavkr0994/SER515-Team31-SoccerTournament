@@ -104,6 +104,8 @@ export default function CreateTournament() {
     .then((res) => {
       if (!res.isSuccess) {
         throw new Error(res);
+      }else{
+        alert("Tournament created! Please go to the tournament page to see it!")
       }
     })
     .catch(() => {});
