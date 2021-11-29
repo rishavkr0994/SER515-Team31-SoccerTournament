@@ -12,6 +12,7 @@ import { DialogContentText } from "@mui/material";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/themes/theme-blue.css";
 import "./awsButton.css";
+import API_BASE from "../api/api";
 export default function SignInSignUp() {
   const dispatch = useDispatch();
   const [openLogin, setOpenLogin] = React.useState(false);
@@ -26,16 +27,13 @@ export default function SignInSignUp() {
   };
 
   const handleLogin = () => {
-    fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/user/signin",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(userLogin),
-      }
-    )
+    fetch(API_BASE + "rest/user/signin", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(userLogin),
+    })
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {
@@ -45,7 +43,7 @@ export default function SignInSignUp() {
             setUser({
               role: res.data.role,
               email: res.data.eMailAddress,
-              jwt: res.data.jwt,
+              jwt:"Bearer "+ res.data.jwt,
               firstName: res.data.firstName,
               lastName: res.data.lastName,
             })

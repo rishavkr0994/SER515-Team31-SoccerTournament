@@ -35,14 +35,17 @@ function TopLeft() {
   const userInfo = GetUser();
   if (userInfo.isLoggedIn) {
     return (
+      <div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Share></Share>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{marginTop:"50px"}}>
           <UserProfile></UserProfile>
         </Grid>
       </Grid>
+      </div>
+
     );
   } else {
     return(

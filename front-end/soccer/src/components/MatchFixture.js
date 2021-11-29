@@ -14,8 +14,11 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import EmailIcon from "@mui/icons-material/Email";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import './MatchFixture.css'
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import "./MatchFixture.css";
+import { useEffect } from "react";
+import axios from 'axios'
+
 import {
   Grid,
   Button,
@@ -25,49 +28,139 @@ import {
   TextField,
 } from "@mui/material";
 import { InputAdornment } from "@material-ui/core";
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: "2020-01-05",
-        customerId: "11091700",
-        amount: 3,
+import GetUser from "../utils/GetUser";
+import API_BASE from "../api/api";
+import BlockRotateLoading from "./BlockRotateLoading";
+
+
+
+export default function MatchFixture(props) {
+  const [rows, setRows] = useState({ arr: [], isLoading: true, render: false });
+  const name = props.name;
+  const userInfo = GetUser();
+  const [price,setPrice] = useState({isLoading : true});
+
+  useEffect(() => {
+    fetch(API_BASE+"rest/tournament/"+ name,{
+      headers:{
+        Authorization: userInfo.jwt
       },
-      {
-        date: "2020-01-02",
-        customerId: "Anonymous",
-        amount: 1,
+      method : "GET"
+    }).then((res)=> res.json())
+    .then((res)=>{
+      const newPrice = {...price};
+      newPrice.isLoading = false;
+      newPrice.value = res.data.ticketPrice;
+      setPrice(newPrice);
+    }).catch(error=>{
+      console.log(error);
+    });
+    fetch(API_BASE +"rest/tournament/" + name + "/fixtures", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.jwt
       },
-    ],
-  };
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const newRows = { ...rows };
+        newRows.arr = res.data;
+        newRows.isLoading = false;
+        setRows(newRows);
+        console.log(res);
+      }).catch((error)=>{
+        console.log(error);
+      });
+  }, []);
+
+  if(price.isLoading){
+    return <BlockRotateLoading></BlockRotateLoading>
+  }
+
+  return (
+    <div className="Main">
+      <TableContainer component={Paper} sx={{ marginTop: "30px" }}>
+        <Table aria-label="collapsible table">
+          <TableHead className="titleBg" sx={{ fontWeight: "900" }}>
+            <TableRow>
+              <TableCell />
+              <TableCell>Time</TableCell>
+              <TableCell align="center">Team1</TableCell>
+              <TableCell align="center">Team2</TableCell>
+              <TableCell align="center">Field</TableCell>
+              {/* <TableCell align="right">whatever</TableCell> */}
+            </TableRow>
+          </TableHead>
+          <TableBody >
+            {rows.arr.map((row) => (
+              <Row key={row.id} row={row} price={price.value} />
+            )
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
 }
+
 
 function Row(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState(false);
+  const userInfo = GetUser();
   const [booking, setBooking] = useState(false);
-  const price = 20;
-  const [total,setTotal] = useState(0);
+  const price = props.price;
+  const [total, setTotal] = useState(0);
   const handleBooking = () => {
     setBooking(true);
   };
 
-  const [order,setOrder] = useState({quantites:"0"})
+  useEffect(() => {
+    if(row.availableTicketCount>0){
+      setAvailable(true)
+    }
+  }, [])
+
+  const [order, setOrder] = useState({ quantites: "0" });
 
   const handleClose = () => {
     setBooking(false);
   };
+
+  const handleSubmit = () => {
+    console.log(userInfo.jwt);
+    axios({
+      url:API_BASE +"rest/match/"+row.id+"/bookTicket",
+      method:"POST",
+      headers:{
+        Authorization: userInfo.jwt,
+        "Content-Type":"application/json"
+      },
+      data:{
+        "emailAddress": order.email,
+        "ticketCount": order.quantites
+      }
+    }).then((res)=>{
+      console.log(res);
+      if(res.data.isSuccess){
+        alert("Congratulation! Tickets booked successfuly! Please check your email!")
+        row.availableTicketCount = row.availableTicketCount - order.quantites;
+        setBooking(false)
+      }else{
+        alert(res.data.errMsg)
+        setBooking(false)
+      }
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell>
+      <TableRow>
+        <TableCell >
           <IconButton
             aria-label="expand row"
             size="small"
@@ -76,13 +169,12 @@ function Row(props) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.name}
+        <TableCell component="th" scope="row" style={{fontSize:"15px",color:"green"}}>
+          {row.time}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="center" >{row.team1}</TableCell>
+        <TableCell align="center">{row.team2}</TableCell>
+        <TableCell align="center">{row.field}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -93,10 +185,10 @@ function Row(props) {
               </Typography>
               <Grid container justifyContent="center" alignContent="center">
                 <Grid item xs={3}>
-                  Price:
+                  Price:{" "+props.price+" $"}
                 </Grid>
                 <Grid item xs={3}>
-                  Seats Available:
+                  Seats Available:{row.availableTicketCount}/{row.aggregateTicketCount}
                 </Grid>
                 <Grid item xs={3}>
                   <Button
@@ -134,9 +226,9 @@ function Row(props) {
                           label="Email"
                           type="email"
                           onChange={(e) => {
-                            const newOrder = {...order}
+                            const newOrder = { ...order };
                             newOrder.email = e.target.value;
-                            setOrder(newOrder)
+                            setOrder(newOrder);
                           }}
                           sx={{ maxWidth: "300px" }}
                         />
@@ -146,12 +238,13 @@ function Row(props) {
                           id="quantities"
                           label="quantities"
                           type="number"
+                          value={order.quantites}
                           onChange={(e) => {
-                              const newTotal  = price * e.target.value;
-                              setTotal(newTotal);
-                              const newOrder = {...order}
-                              newOrder.quantites = e.target.value;
-                              setOrder(newOrder)
+                            const newTotal = price * e.target.value;
+                            setTotal(newTotal);
+                            const newOrder = { ...order };
+                            newOrder.quantites = e.target.value;
+                            setOrder(newOrder);
                           }}
                         />
                       </Grid>
@@ -179,7 +272,7 @@ function Row(props) {
                       </Button>
                       <Button
                         variant="contained"
-                        onClick={handleClose}
+                        onClick={handleSubmit}
                         autoFocus
                       >
                         Submit
@@ -193,38 +286,5 @@ function Row(props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  );
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
-export default function MatchFixture() {
-  return (
-    <div className="Main">
-      <TableContainer component={Paper} sx={{marginTop:"30px"}}>
-        <Table aria-label="collapsible table">
-          <TableHead className="titleBg" sx={{fontWeight:"900"}}>
-            <TableRow>
-              <TableCell />
-              <TableCell>Time</TableCell>
-              <TableCell align="right">Team1</TableCell>
-              <TableCell align="right">Team2</TableCell>
-              <TableCell align="right">Field</TableCell>
-              <TableCell align="right">whatever</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row key={row.name} row={row} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
   );
 }

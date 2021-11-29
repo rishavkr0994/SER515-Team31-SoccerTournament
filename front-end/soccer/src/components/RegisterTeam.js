@@ -13,6 +13,7 @@ import "./FooterAndMain.css";
 import "./ATournament.css";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
+import API_BASE from "../api/api";
 
 export default function RegisterTeam(props) {
   const state = useSelector((state) => state);
@@ -26,30 +27,27 @@ export default function RegisterTeam(props) {
     setShowError(true);
     setShowSuccess(false);
   };
-  const handleSuccess = () =>{
+  const handleSuccess = () => {
     setShowSuccess(true);
     setShowError(false);
-  }
+  };
   const handleRegister = () => {
     console.log(teamRegister);
-    fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/team/registration",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: userInfo.jwt,
-        },
-        method: "POST",
-        body: JSON.stringify(teamRegister),
-      }
-    )
+    fetch(API_BASE + "rest/team/registration", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: userInfo.jwt,
+      },
+      method: "POST",
+      body: JSON.stringify(teamRegister),
+    })
       .then((res) => res.json())
       .then((res) => {
         if (!res.isSuccess) {
-          handleError(res)
+          handleError(res);
           throw new Error(res);
         }
-        handleSuccess()
+        handleSuccess();
       })
       .catch(() => {});
   };
@@ -102,9 +100,7 @@ export default function RegisterTeam(props) {
             minWidth: "450px",
           }}
         >
-          <div className="registerTitle">
-            Register your team!
-          </div>
+          <div className="registerTitle">Register your team!</div>
           <Box
             component="form"
             sx={{
@@ -121,7 +117,7 @@ export default function RegisterTeam(props) {
                 onChange={(e) => {
                   setTeamRegister({
                     name: e.target.value,
-                    tournamentName:props.name,
+                    tournamentName: props.name,
                     type: teamRegister.type,
                   });
                 }}
@@ -162,7 +158,11 @@ export default function RegisterTeam(props) {
             </div>
             <Button
               variant="contained"
-              sx={{ marginTop: "50px", alignContent: "flex-end",marginRight:"20px" }}
+              sx={{
+                marginTop: "50px",
+                alignContent: "flex-end",
+                marginRight: "20px",
+              }}
               onClick={handleRegister}
             >
               Submit

@@ -8,41 +8,41 @@ import GetUser from "../utils/GetUser";
 import { useState } from "react";
 import axios from "axios";
 import BlockRotateLoading from "./BlockRotateLoading";
-
+import API_BASE from "../api/api";
 
 export default function AllTournament() {
   const userInfo = GetUser();
-  const [data, setData] = useState({isLoading:true});
-  const [page,setPage] = useState(1)
-  const [rows, setRows] = useState({arr:[],isLoading:true,render:false})
+  const [data, setData] = useState({ isLoading: true });
+  const [page, setPage] = useState(1);
+  const [rows, setRows] = useState({ arr: [], isLoading: true, render: false });
   const [query, setQuery] = useState({});
   useEffect(() => {
     const newQ = {
       page: 1,
       size: 10,
       filterUpcoming: false,
-      isLoading:true
-    }
-    setQuery(newQ)
-    fetchData()
-  },[]);
+      isLoading: true,
+    };
+    setQuery(newQ);
+    fetchData();
+  }, []);
 
-  const handlePageChange = (e,p)=>{
-    const newp = p
-    setPage(newp)
-    const newQ = {...query};
+  const handlePageChange = (e, p) => {
+    const newp = p;
+    setPage(newp);
+    const newQ = { ...query };
     newQ.page = p;
-    newQ.isLoading = ! query.isLoading;
-    setQuery(newQ)
+    newQ.isLoading = !query.isLoading;
+    setQuery(newQ);
     fetchData(p);
-  }
+  };
 
-   function fetchData(p){
+  function fetchData(p) {
     console.log("check Query");
     console.log(query);
     axios({
       method: "GET",
-      url: "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament",
+      url: API_BASE + "rest/tournament",
       headers: {
         Authorization: userInfo.jwt,
       },
@@ -54,22 +54,27 @@ export default function AllTournament() {
     }).then((res) => {
       console.log("from backend");
       console.log(res.data);
-      const newData = {...data}
-      newData.res = res.data
+      const newData = { ...data };
+      newData.res = res.data;
       newData.isLoading = false;
       newData.render = !data.render;
       setData(newData);
       const arr = Object.values(res.data.data);
-      const newT = {...rows};
+      const newT = { ...rows };
       newT.arr = arr;
       newT.isLoading = !rows.isLoading;
-      newT.render = !rows.render
-      setRows(newT)
+      newT.render = !rows.render;
+      setRows(newT);
     });
   }
 
-  if (data.isLoading) return(       <BlockRotateLoading></BlockRotateLoading>);
-  return(
+  if (data.isLoading)
+    return (
+      <div className="Main">
+        <BlockRotateLoading></BlockRotateLoading>
+      </div>
+    );
+  return (
     <div
       className="Main"
       style={{ marginTop: "30px", justifyContent: "center" }}
@@ -87,15 +92,16 @@ export default function AllTournament() {
         count={data.res.pageCount}
         variant="outlined"
         page={page}
-        onChange={(e,page)=>{
-          handlePageChange(e,page)
+        onChange={(e, page) => {
+          handlePageChange(e, page);
         }}
         color="secondary"
         sx={{ display: "flex", justifyContent: "center", marginTop: "25px" }}
       />
-      <Button variant="contained" href="/tournament/create">
-        Add Tournament
-      </Button>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "25px" }}
+      >
+      </div>
     </div>
   );
 }
