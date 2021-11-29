@@ -1,5 +1,5 @@
 .Footer{
-    background-color: black;
+    background-color: grey;
     height: 50px;
     /* position:relative; */
     bottom: 0px;
@@ -22,4 +22,16 @@
     background-image: url('../bg.png');
     background-size:contain;
     background-repeat: repeat;
+}
+
+.aboutTitle{
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+
+.aboutContent{
+    font-size: 15px;
+    color: white;
+    text-align: center;
 }
