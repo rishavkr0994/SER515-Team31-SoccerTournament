@@ -57,7 +57,7 @@ export default function Home() {
           style={{
             display: "flex",
             justifyContent: "center",
-            marginTop: "25px",
+            marginTop: "80px",
           }}
         >
           <Button
