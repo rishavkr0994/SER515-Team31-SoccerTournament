@@ -16,19 +16,84 @@ const markers = [
   },
   {
     id: 3,
-    name: "B-001, Phoenix Sports Centre",
+    name: "A-003, Phoenix Sports Centre",
     position: { lat: 33.45609, lng: -111.98953 },
   },
   {
     id: 4,
-    name: "B-002, Desert West Sports Complex",
+    name: "A-004, Desert West Sports Complex",
     position: { lat: 33.3717, lng: -112.21181 },
   },
   {
     id: 5,
-    name: "B-002, ewrwerwer",
-    position: { lat: 34.3717, lng: -112.223481 },
+    name: "A-005, Deer Valley Soccer Fields",
+    position: { lat: 33.8717, lng: -112.675335 },
   },
+  {
+    id: 6,
+    name: "A-006, Reach 11 Sports Complex",
+    position: { lat: 33.2727, lng: -113.500000 },
+  },
+  {
+    id: 7,
+    name: "B-001, Westside Sports Complex",
+    position: { lat: 34.3717, lng: -113.437654 },
+  },
+  {
+    id: 8,
+    name: "B-002, Desert West Park Mini-Patches",
+    position: { lat: 35.3717, lng: -113.098909 },
+  },
+  {
+    id: 9,
+    name: "B-003, Benedict Sports Complex",
+    position: { lat: 34.5643, lng: -111.549080 },
+  },
+  {
+    id: 10,
+    name: "B-004, Legends Elite Soccer",
+    position: { lat: 34.3987, lng: -113.876656 },
+  },
+  {
+    id: 11,
+    name: "B-005, Hanger Park Soccer Field",
+    position: { lat: 34.5000, lng: -112.987634 },
+  },
+  {
+    id: 12,
+    name: "B-006, Scottsdale Sports Complex",
+    position: { lat: 34.1000, lng: -113.650989 },
+  },
+  {
+    id: 13,
+    name: "C-001, Phoenix Rising FC Soccer Complex at Wild Horse Pass",
+    position: { lat: 33.8734, lng: -113.654377 },
+  },
+  {
+    id: 14,
+    name: "C-002, Stroud Park Soccer Field",
+    position: { lat: 33.6534, lng: -114.765432 },
+  },
+  {
+    id: 15,
+    name: "C-003, Celaya Park Soccer Field",
+    position: { lat: 32.7654, lng: -113.223481 },
+  },
+  {
+    id: 16,
+    name: "C-004, GCU Stadium",
+    position: { lat: 33.5432, lng: -113.453629 },
+  },
+  {
+    id: 17,
+    name: "C-005, Arizona Sand Soccer",
+    position: { lat: 33.6521, lng: -113.223481 },
+  },
+  {
+    id: 18,
+    name: "C-006, Hollis Park Soccer Field",
+    position: { lat: 34.6278, lng: -113.223481 },
+  }
 ];
 
 function Map() {
@@ -60,10 +125,52 @@ function Map() {
         }}>FIELD-A-002</a>
         <a onClick={e=>{
           handleActiveMarker(3)
-        }}>FIELD-B-001</a>
+        }}>FIELD-A-003</a>
         <a onClick={e=>{
           handleActiveMarker(4)
+        }}>FIELD-A-004</a>
+        <a onClick={e=>{
+          handleActiveMarker(5)
+        }}>FIELD-A-005</a>
+        <a onClick={e=>{
+          handleActiveMarker(6)
+        }}>FIELD-A-006</a>
+        <a onClick={e=>{
+          handleActiveMarker(7)
+        }}>FIELD-B-001</a>
+        <a onClick={e=>{
+          handleActiveMarker(8)
         }}>FIELD-B-002</a>
+        <a onClick={e=>{
+          handleActiveMarker(9)
+        }}>FIELD-B-003</a>
+        <a onClick={e=>{
+          handleActiveMarker(10)
+        }}>FIELD-B-004</a>
+        <a onClick={e=>{
+          handleActiveMarker(11)
+        }}>FIELD-B-005</a>
+        <a onClick={e=>{
+          handleActiveMarker(12)
+        }}>FIELD-B-006</a>
+        <a onClick={e=>{
+          handleActiveMarker(13)
+        }}>FIELD-C-001</a>
+        <a onClick={e=>{
+          handleActiveMarker(14)
+        }}>FIELD-C-002</a>
+        <a onClick={e=>{
+          handleActiveMarker(15)
+        }}>FIELD-C-003</a>
+        <a onClick={e=>{
+          handleActiveMarker(16)
+        }}>FIELD-C-004</a>
+        <a onClick={e=>{
+          handleActiveMarker(17)
+        }}>FIELD-C-005</a>
+        <a onClick={e=>{
+          handleActiveMarker(18)
+        }}>FIELD-C-006</a>
       </Stack>
         </Grid>
         <Grid item xs={11}>
