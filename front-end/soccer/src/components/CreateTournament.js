@@ -25,6 +25,7 @@ import { DatePicker } from "@mui/lab";
 import GetUser from "../utils/GetUser";
 import { InputAdornment, MenuItem } from "@material-ui/core";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import API_BASE from "../api/api";
 
 export default function CreateTournament() {
   const [value, setValue] = React.useState(null);
@@ -90,7 +91,7 @@ export default function CreateTournament() {
 
   const handleSubmit = () => {
     fetch(
-      "http://ser515-team31-soccertournament-server.us-east-2.elasticbeanstalk.com/rest/tournament/registration",
+      API_BASE+"rest/tournament/registration",
       {
         headers: {
           "Content-Type": "application/json",
