@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import { Stack, Grid } from '@mui/material';
-import '../App.css'
+import './Map.css'
 
 const markers = [
   {
