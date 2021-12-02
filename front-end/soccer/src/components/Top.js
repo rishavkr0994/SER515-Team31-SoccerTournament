@@ -44,7 +44,7 @@ function TopLeft() {
         <Grid item xs={12}>
           <Share></Share>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{marginBottom:"10px"}}>
         <SignInSignUp></SignInSignUp>
         </Grid>
       </Grid>

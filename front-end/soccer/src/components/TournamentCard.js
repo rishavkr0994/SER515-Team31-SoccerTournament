@@ -33,7 +33,7 @@ export default function TournamentCard(props) {
   return (
     <Card sx={{width:"100%",height:"100%",maxWidth:"300px",maxHeight:"400px",minWidth:"250px"}}>
         { onGoing &&
-            <img className="Fire" src="https://i.ibb.co/5XDzD1p/7cdaed0ede86.gif" alt="" height="60" />
+            <img className="Fire" src="https://i.ibb.co/QDS5mHb/fire.gif" alt="" height="60" />
         }
       <CardMedia
         component="img"

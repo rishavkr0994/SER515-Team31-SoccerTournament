@@ -116,7 +116,7 @@ export default function RegisterTeam(props) {
                 label="Team name"
                 onChange={(e) => {
                   setTeamRegister({
-                    name: e.target.value,
+                    teamName: e.target.value,
                     tournamentName: props.name,
                     type: teamRegister.type,
                   });
